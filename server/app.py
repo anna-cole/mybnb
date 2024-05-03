@@ -11,45 +11,45 @@ from models import Guest, Booking, Property, Review
 def index():
     return '<h1>Project Server</h1>'
 
-# class Signup(Resource):
-#     def post(self):
-#         username = request.get_json().get('username')
-#         email = request.get_json().get('email') 
-#         password = request.get_json().get('password')
-#         try:
-#             user = User(username=username, email=email)
-#             user.password_hash = password
-#             db.session.add(user)
-#             db.session.commit()
-#             session['user_id'] = user.id
-#             return user.to_dict(), 201 
-#         except IntegrityError:   
-#             return {'error': 'Error 422: Unprocessable Entity (username already exists)'}, 422
+class Signup(Resource):
+    def post(self):
+        name = request.get_json().get('name')
+        email = request.get_json().get('email') 
+        password = request.get_json().get('password')
+        try:
+            guest = Guest(name=name, email=email)
+            guest.password_hash = password
+            db.session.add(guest)
+            db.session.commit()
+            session['guest_id'] = guest.id
+            return guest.to_dict(), 201 
+        except IntegrityError:   
+            return {'error': 'Error 422: Unprocessable Entity (name already exists)'}, 422
 
-# class CheckSession(Resource):
-#     def get(self):
-#         user_id = session['user_id']
-#         if user_id:
-#             user = User.query.filter(User.id == user_id).first()
-#             return user.to_dict(), 200
-#         return {'error': '401 Unauthorized'}, 401 
+class CheckSession(Resource):
+    def get(self):
+        guest_id = session['guest_id']
+        if guest_id:
+            guest = Guest.query.filter(Guest.id == guest_id).first()
+            return guest.to_dict(), 200
+        return {'error': '401 Unauthorized'}, 401 
     
-# class Login(Resource):
-#     def post(self):
-#         username = request.get_json()['username']
-#         password = request.get_json()['password']
-#         user = User.query.filter(User.username == username).first()
-#         if user.authenticate(password):           
-#             session['user_id'] = user.id
-#             return user.to_dict(), 200       
-#         return {'error': 'Error 401: Unauthorized (invalid password)'}, 401
+class Login(Resource):
+    def post(self):
+        name = request.get_json()['name']
+        password = request.get_json()['password']
+        guest = Guest.query.filter(Guest.name == name).first()
+        if guest.authenticate(password):           
+            session['guest_id'] = guest.id
+            return guest.to_dict(), 200       
+        return {'error': 'Error 401: Unauthorized (invalid password)'}, 401
     
-# class Logout(Resource):
-#     def delete(self):
-#         if session['user_id']:
-#             session['user_id'] = None
-#             return {}, 204
-#         return {'error': '401 Unauthorized'}, 401
+class Logout(Resource):
+    def delete(self):
+        if session['guest_id']:
+            session['guest_id'] = None
+            return {}, 204
+        return {'error': '401 Unauthorized'}, 401
        
 # class Pros(Resource):
 #     def get(self):        
@@ -194,27 +194,27 @@ def index():
 #         reviews = Review.query.all()
 #         return [review.to_dict() for review in reviews if content.lower() in review.content.lower()], 200
 
-# class Users(Resource):
-#     def get(self):        
-#         users = User.query.all()
-#         return [user.to_dict() for user in users], 200
+class Guests(Resource):
+    def get(self):        
+        guests = Guest.query.all()
+        return [guest.to_dict() for guest in guests], 200
     
-# class UserById(Resource):
-#     def get(self, id):
-#         user = User.query.filter_by(id=id).first()
-#         if user:
-#             return make_response(jsonify(user.to_dict()), 200)
-#         return {'error': '422 Unprocessable Entity'}, 422
+class GuestById(Resource):
+    def get(self, id):
+        guest = Guest.query.filter_by(id=id).first()
+        if guest:
+            return make_response(jsonify(guest.to_dict()), 200)
+        return {'error': '422 Unprocessable Entity'}, 422
     
-# class UsersByReviewRating(Resource):
-#     def get(self, rating):
-#         reviews = Review.query.filter(Review.rating==rating).all()
-#         return [review.user.to_dict() for review in reviews], 200
+class GuestsByReviewRating(Resource):
+    def get(self, rating):
+        reviews = Review.query.filter(Review.rating==rating).all()
+        return [review.guest.to_dict() for review in reviews], 200
     
-# api.add_resource(Signup, '/signup', endpoint='signup')
-# api.add_resource(CheckSession, '/check_session', endpoint='check_session')
-# api.add_resource(Login, '/login', endpoint='login')
-# api.add_resource(Logout, '/logout', endpoint='logout')
+api.add_resource(Signup, '/signup', endpoint='signup')
+api.add_resource(CheckSession, '/check_session', endpoint='check_session')
+api.add_resource(Login, '/login', endpoint='login')
+api.add_resource(Logout, '/logout', endpoint='logout')
 # api.add_resource(Pros, '/pros', endpoint='pros')
 # api.add_resource(ProById, '/pros/<int:id>', endpoint='pros/id')
 # api.add_resource(ProByName, '/pros/<string:name>', endpoint='pros/name')
@@ -232,9 +232,9 @@ def index():
 # api.add_resource(ReviewsByProId, '/reviews/reviews_by_pro/<int:pro_id>', endpoint='reviews/reviews_by_pro/pro_id')
 # api.add_resource(ReviewsByUser, '/reviews/reviews_by_user/<string:username>', endpoint='reviews/reviews_by_user/username')
 # api.add_resource(ReviewsByContent, '/reviews/search_by_content/<string:content>', endpoint='reviews/search_by_content/content')
-# api.add_resource(Users, '/users', endpoint='users') 
-# api.add_resource(UserById, '/users/<int:id>', endpoint='users/id')
-# api.add_resource(UsersByReviewRating, '/users/users_by_review_rating/<int:rating>', endpoint='users/users_by_review_rating/rating') 
+api.add_resource(Guests, '/guests', endpoint='guests') 
+api.add_resource(GuestById, '/guests/<int:id>', endpoint='guests/id')
+api.add_resource(GuestsByReviewRating, '/guests/guests_by_review_rating/<int:rating>', endpoint='guests/guests_by_review_rating/rating') 
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

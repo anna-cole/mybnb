@@ -6,7 +6,7 @@ from config import db, bcrypt
 
 class Guest(db.Model, SerializerMixin):
     __tablename__ = 'guests'
-    serialize_rules = ('-properties.guests', '-bookings.guest', '-reviews.guest', '-_password_hash',)
+    serialize_rules = ('-bookings.guest','-bookings.property', '-reviews.guest', '-reviews.property', '-property.bookings', '-property.reviews', '-_password_hash',)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False)
@@ -42,7 +42,7 @@ class Guest(db.Model, SerializerMixin):
 
 class Booking(db.Model, SerializerMixin):
     __tablename__ = 'bookings'
-    serialize_rules = ('-guest.bookings', '-property.bookings',)
+    serialize_rules = ('-guest.bookings', '-guest.reviews', '-reviews.guest', '-reviews.property', '-property.bookings', '-property.reviews',)
     
     id = db.Column(db.Integer, primary_key=True)
     check_in = db.Column(db.Date, nullable=False)
@@ -60,7 +60,7 @@ class Booking(db.Model, SerializerMixin):
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
     __table_args__ = (db.CheckConstraint('LENGTH(content) >= 5'),)
-    serialize_rules = ('-guest.reviews', '-property.reviews',)
+    serialize_rules = ('-guest.reviews', '-guest.bookings', '-bookings.guest','-bookings.property', '-property.reviews', '-property.bookings',)
     
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
@@ -77,7 +77,7 @@ class Review(db.Model, SerializerMixin):
 
 class Property(db.Model, SerializerMixin):
     __tablename__ = 'properties'
-    serialize_rules = ('-guests.properties', '-bookings.property', '-reviews.property',)
+    serialize_rules = ('-guest.reviews', '-guest.bookings', '-bookings.guest','-bookings.property', '-reviews.guest', '-reviews.property',)
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
