@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 from random import randint, choice as rc
-
 from faker import Faker
-
 from app import app
 from models import db, Guest, Booking, Property, Review
 
@@ -12,37 +10,39 @@ if __name__ == '__main__':
     with app.app_context():
 
         print("Deleting all records...")
+
         Review.query.delete()
-        User.query.delete()
-        Pro.query.delete()
+        Guest.query.delete()
+        Property.query.delete()
+        Booking.query.delete()
 
         fake = Faker()
         
-        print("Creating users...")
+        print("Creating guests...")
 
-        users = []
-        usernames = []
+        guests = []
+        names = []
 
         for i in range(5):
-        
-            username = fake.first_name()
-            while username in usernames:
-                username = fake.first_name()
-            usernames.append(username)
 
-            user = User(
-                username=username,
+            name = fake.name()
+            while name in names:
+                name = fake.name()
+            names.append(name)
+
+            guest = Guest(
+                name=name,
                 email=fake.email(),
             )
 
-            user.password_hash = user.username + 'password'
+            guest.password_hash = guest.name + 'password'
 
-            users.append(user)
+            guests.append(guest)
 
-        db.session.add_all(users)
+        db.session.add_all(guests)
         db.session.commit()
 
-        print("Creating pros...")
+        print("Creating properties...")
 
         images = [
             "https://i.pinimg.com/564x/35/fc/55/35fc5508a93fea6884bf72fdf288a477.jpg", 
@@ -55,45 +55,59 @@ if __name__ == '__main__':
             "https://i.pinimg.com/564x/fc/87/3f/fc873f679490aa44cc4c3db63d002894.jpg", 
             "https://i.pinimg.com/564x/67/a7/56/67a75659b20247d04970867b9b6b7370.jpg" 
         ]
-        pros = []
-        names = []
+        properties = []
 
         for i in range(10):
-            name = fake.first_name()
-            while name in names:
-                name = fake.first_name()
-            names.append(name)
 
-            pro = Pro(
-                name=name,
-                average_rating=randint(1,10),
-                image_url=rc(images),
-                # image_url=fake.url(),
-                service=fake.job(),
-                area_served=fake['en-US'].city(),
+            property = Property(
+                title=fake.paragraph(nb_sentences=1),
+                location=fake['en-US'].city(),
+                price=fake.pydecimal(left_digits=2, right_digits=2, positive=True),
+                # image_url=rc(images),
+                image_url=fake.image_url(width=50, height=50),
             )
 
-            pros.append(pro)
+            properties.append(property)
 
-        db.session.add_all(pros)
+        db.session.add_all(properties)
         db.session.commit()
 
         print("Creating reviews...")
+
         reviews = []
+
         for i in range(20):
-            content = fake.paragraph(nb_sentences=3)
         
             review = Review(
                 rating=randint(1,10),
-                content=content,
+                content=fake.paragraph(nb_sentences=2),
             )
 
-            review.user = rc(users)
-            review.pro = rc(pros)
+            review.guest = rc(guests)
+            review.property = rc(properties)
 
             reviews.append(review)
 
         db.session.add_all(reviews)
+        db.session.commit()
+
+        print("Creating bookings...")
+
+        bookings = []
+
+        for i in range(10):
+        
+            booking = Booking(
+                check_in=fake.date_object(),
+                check_out=fake.date_object(),
+            )
+
+            booking.guest = rc(guests)
+            booking.property = rc(properties)
+
+            bookings.append(booking)
+
+        db.session.add_all(bookings)
         db.session.commit()
         
         print("Complete.")
