@@ -1,13 +1,15 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { ErrorContext } from '../context/error';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-const Signup = ({ login, setErrors }) => {
+const Signup = ({ login }) => {
+  const { error, setError } = useContext(ErrorContext);
 
   useEffect(() => {
     return () => {
-      setErrors(null);
+      setError(null);
     }
   }, [])
 
@@ -42,7 +44,7 @@ const Signup = ({ login, setErrors }) => {
             navigate("/properties")
           })
         } else {
-          resp.json().then(error => setErrors(error.error))
+          resp.json().then(data => setError(data.error))
         }
       })
     }

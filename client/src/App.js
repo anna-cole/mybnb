@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Properties from './components/Properties';
 import Navbar from './components/Navbar';
-import Errors from './components/Errors';
+import Error from './components/Error';
 // import Pro from './components/Pro';
 // import ProForm from './components/ProForm';
 
 const App = () => {
-  const [errors, setErrors] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   // const [pros, setPros] = useState([]);
@@ -59,15 +58,15 @@ const App = () => {
   //   const updatedPros = pros.filter(pro => pro.id !== id)
   //   setPros(updatedPros)
   // }
-  
+
   return (
     <Router>
       <Navbar logout={logout} loggedIn={loggedIn} />
-      <Errors errors={errors} />
+      <Error />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login login={login} setErrors={setErrors} />} />
-        <Route path="/signup" element={<Signup login={login} setErrors={setErrors} />} />
+        <Route path="/login" element={<Login login={login} />} />
+        <Route path="/signup" element={<Signup login={login} />} />
         <Route path="/properties" element={<Properties />} />
         {/* <Route path="/properties" element={<Properties properties={properties} currentUser={currentUser} deleteProperty={deleteProperty} updateProperty={updateProperty} />} /> */}
         {/* <Route path="/pros/:id" element={<Pro />} />
