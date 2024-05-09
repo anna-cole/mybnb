@@ -149,10 +149,6 @@ li h1 {
   max-width: 600px;
 }
 
-li h3 {
-  color:rgb(6, 145, 188)
-}
-
 .link {
   color: rgb(6, 145, 188);
 }
@@ -167,6 +163,7 @@ li h3 {
 
 .card {
   margin: 1rem;
+  color:#676d73;
 }
 
 .card img {

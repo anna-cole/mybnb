@@ -1,23 +1,23 @@
-// import { useState } from "react";
-// import SearchPro from "./SearchPro";
-// import ProCard from './ProCard';
+import { useState } from "react";
+import SearchProperty from "./SearchProperty";
+import PropertyCard from './PropertyCard';
 
-const Properties = () => {
-  // { pros, currentUser, deletePro, updatePro } usar nos props
-  // const [search, setSearch] = useState('');
+const Properties = ({ properties, currentUser }) => {
+  const [search, setSearch] = useState('');
 
-  // const prosToDisplay = pros.filter(pro => pro.name.toLowerCase().includes(search.toLowerCase()) || pro.service.toLowerCase().includes(search.toLowerCase()) || pro.area_served.toLowerCase().includes(search.toLowerCase()))
+  const propertiesToDisplay = properties.filter(property => property.title.toLowerCase().includes(search.toLowerCase()) || property.location.toLowerCase().includes(search.toLowerCase()))
+
+  if (!currentUser) return <h2>Please login to view properties</h2>;
 
   return (
     <div className="app">
-      <p>properties</p>
-      {/* <p>{prosToDisplay.length} pros based on your criteria.<br />
-      Narrow down your search by name, specialty or area.</p>
-      <SearchPro onChangeText={e => setSearch(e.target.value)} search={search} />
+      <p>{propertiesToDisplay.length} properties based on your criteria.<br />
+      Narrow down your search by title or location.</p>
+      <SearchProperty onChangeText={e => setSearch(e.target.value)} search={search} />
       <ul className="cards">
-        {prosToDisplay.map(pro => 
-        <ProCard key={pro.id} pro={pro} currentUser={currentUser} deletePro={deletePro} updatePro={updatePro} />)}
-      </ul> */}
+        {propertiesToDisplay.map(property => 
+        <PropertyCard key={property.id} property={property} />)}
+      </ul>
     </div>
   )
 }

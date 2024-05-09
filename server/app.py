@@ -51,25 +51,11 @@ class Logout(Resource):
             return {}, 204
         return {'error': '401 Unauthorized'}, 401
        
-# class Pros(Resource):
-#     def get(self):        
-#         pros = Pro.query.all()
-#         resp = [pro.to_dict() for pro in pros]
-#         return make_response(resp, 200)
-    
-#     def post(self):
-#         user_id = session['user_id']
-#         user = User.query.filter(User.id == user_id).first()
-#         name = request.get_json().get('name')
-#         image_url = request.get_json().get('image_url') 
-#         service = request.get_json().get('service')
-#         area_served = request.get_json().get('area_served')
-#         if name == user.username: 
-#             pro = Pro(name=name, image_url=image_url, service=service, area_served=area_served)
-#             db.session.add(pro)
-#             db.session.commit()
-#             return pro.to_dict(), 201 
-#         return {'error': 'Error 422: Unprocessable Entity (enter your username)'}, 422
+class Properties(Resource):
+    def get(self):        
+        properties = Property.query.all()
+        resp = [property.to_dict() for property in properties]
+        return make_response(resp, 200)
 
 # class ProById(Resource):
 
@@ -215,7 +201,7 @@ api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
-# api.add_resource(Pros, '/pros', endpoint='pros')
+api.add_resource(Properties, '/properties', endpoint='properties')
 # api.add_resource(ProById, '/pros/<int:id>', endpoint='pros/id')
 # api.add_resource(ProByName, '/pros/<string:name>', endpoint='pros/name')
 # api.add_resource(ProsByService, '/pros/<string:service>', endpoint='pros/service')

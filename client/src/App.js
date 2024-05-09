@@ -12,7 +12,7 @@ import Error from './components/Error';
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
-  // const [pros, setPros] = useState([]);
+  const [properties, setProperties] = useState([]);
 
   useEffect(() => {
     fetch("/check_session")
@@ -23,11 +23,11 @@ const App = () => {
     })
   }, [])
 
-  // useEffect(() => {
-  //   fetch("/pros")
-  //     .then(resp => resp.json())
-  //     .then(pros => setPros(pros))
-  // }, [])
+  useEffect(() => {
+    fetch("/properties")
+      .then(resp => resp.json())
+      .then(properties => setProperties(properties))
+  }, [])
 
   const login = guest => {
     setCurrentUser(guest)
@@ -39,26 +39,6 @@ const App = () => {
     setLoggedIn(false)
   }
 
-  // const addPro = newPro => {
-  //   setPros([...pros, newPro])
-  // }
-
-  // const updatePro = updatedProObj => {
-  //   const updatedPros = pros.map(pro => {
-  //     if (pro.id === updatedProObj.id) {
-  //       return updatedProObj
-  //     } else {
-  //       return pro
-  //     }
-  //   })
-  //   setPros(updatedPros)
-  // }
-
-  // const deletePro = id => {
-  //   const updatedPros = pros.filter(pro => pro.id !== id)
-  //   setPros(updatedPros)
-  // }
-
   return (
     <Router>
       <Navbar logout={logout} loggedIn={loggedIn} />
@@ -67,8 +47,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login login={login} />} />
         <Route path="/signup" element={<Signup login={login} />} />
-        <Route path="/properties" element={<Properties />} />
-        {/* <Route path="/properties" element={<Properties properties={properties} currentUser={currentUser} deleteProperty={deleteProperty} updateProperty={updateProperty} />} /> */}
+        <Route path="/properties" element={<Properties properties={properties} currentUser={currentUser}/>} />
         {/* <Route path="/pros/:id" element={<Pro />} />
         <Route path="/newpro" element={<ProForm addPro={addPro} setErrors={setErrors} />} /> */}
       </Routes>
