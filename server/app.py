@@ -57,28 +57,12 @@ class Properties(Resource):
         resp = [property.to_dict() for property in properties]
         return make_response(resp, 200)
 
-# class ProById(Resource):
-
-#     def get(self, id):
-#         pro = Pro.query.filter_by(id=id).first()
-#         if pro:
-#             return make_response(jsonify(pro.to_dict()), 200)
-#         return {'error': '422 Unprocessable Entity'}, 422
-       
-#     def patch(self, id):
-#         pro = Pro.query.filter_by(id=id).first()
-#         for attr in request.get_json():
-#             setattr(pro, attr, request.get_json()[attr])
-#         db.session.add(pro) 
-#         db.session.commit()
-#         return make_response(pro.to_dict(), 200)
-    
-#     def delete(self, id):
-#         pro = Pro.query.filter_by(id=id).first()
-#         db.session.delete(pro)
-#         db.session.commit()
-#         response_body = {"message": ''}
-#         return make_response(response_body, 204)
+class PropertyById(Resource):
+    def get(self, id):
+        property = Property.query.filter_by(id=id).first()
+        if property:
+            return make_response(jsonify(property.to_dict()), 200)
+        return {'error': '422 Unprocessable Entity'}, 422
     
 # class ProByName(Resource):
 #     def get(self, name):
@@ -202,7 +186,7 @@ api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(Properties, '/properties', endpoint='properties')
-# api.add_resource(ProById, '/pros/<int:id>', endpoint='pros/id')
+api.add_resource(PropertyById, '/properties/<int:id>', endpoint='properties/id')
 # api.add_resource(ProByName, '/pros/<string:name>', endpoint='pros/name')
 # api.add_resource(ProsByService, '/pros/<string:service>', endpoint='pros/service')
 # api.add_resource(ProsByAverageRating, '/pros/average_rating/<int:average_rating>', endpoint='pros/average_rating/average_rating')

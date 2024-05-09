@@ -77,7 +77,7 @@ class Review(db.Model, SerializerMixin):
 
 class Property(db.Model, SerializerMixin):
     __tablename__ = 'properties'
-    serialize_rules = ('-guest.reviews', '-guest.bookings', '-bookings.guest','-bookings.property', '-reviews.guest', '-reviews.property',)
+    serialize_rules = ('-guest.reviews', '-guest.bookings', '-bookings.guest','-bookings.property', '-reviews.property',)
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
