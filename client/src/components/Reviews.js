@@ -1,8 +1,8 @@
+import AddReview from "./AddReview";
 // import ReviewForm from "./ReviewForm";
 
-const Reviews = ({ submitNewReview, reviews, property }) => {
+const Reviews = ({ submitNewReview, handleClick, isEditing, reviews, property }) => {
 
-  console.log(reviews)
   return (
     <div className="app">
       <h3>Reviews:</h3>
@@ -13,7 +13,11 @@ const Reviews = ({ submitNewReview, reviews, property }) => {
           <li>Guest: {review.guest.name}</li>
         </ul>
       )}
-      <h3>Add a review for this property</h3>
+      <button onClick={handleClick}>Add a review</button>
+      {isEditing ? (
+        <AddReview property={property} submitNewReview={submitNewReview} />
+      ) : null}
+      {/* <h3>Add a review for this property</h3> */}
       {/* <ReviewForm pro={pro} submitNewReview={submitNewReview}/> */}
     </div>
   )

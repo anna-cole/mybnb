@@ -61,7 +61,7 @@ class PropertyById(Resource):
     def get(self, id):
         property = Property.query.filter_by(id=id).first()
         if property:
-            return make_response(jsonify(property.to_dict()), 200)
+            return make_response(property.to_dict(), 200)
         return {'error': '422 Unprocessable Entity'}, 422
     
 # class ProByName(Resource):
@@ -116,23 +116,23 @@ class PropertyById(Resource):
 #         user = User.query.filter_by(username=username).first()
 #         return [pro.to_dict(only=('id', 'name', 'reviews.content', 'reviews.user.username', 'reviews.rating',)) for pro in user.pros], 200
         
-# class Reviews(Resource):
-#     def get(self):       
-#         reviews = Review.query.all()
-#         return [review.to_dict() for review in reviews], 200
+class Reviews(Resource):
+    def get(self):       
+        reviews = Review.query.all()
+        return [review.to_dict() for review in reviews], 200
     
-#     def post(self):
-#         rating = request.get_json().get('rating')
-#         content = request.get_json().get('content')
-#         pro_id = request.get_json().get('pro_id') 
-#         user_id = session.get('user_id')
-#         try:
-#             review = Review(rating=rating, content=content, pro_id=pro_id, user_id=user_id)
-#             db.session.add(review)
-#             db.session.commit()
-#             return review.to_dict(), 201 
-#         except IntegrityError:   
-#             return {'error': '422 Unprocessable Entity'}, 422
+    def post(self):
+        rating = request.get_json().get('rating')
+        content = request.get_json().get('content')
+        property_id = request.get_json().get('property_id') 
+        guest_id = session.get('guest_id')
+        try:
+            review = Review(rating=rating, content=content, property_id=property_id, guest_id=guest_id)
+            db.session.add(review)
+            db.session.commit()
+            return review.to_dict(), 201 
+        except IntegrityError:   
+            return {'error': '422 Unprocessable Entity'}, 422
         
 # class ReviewById(Resource):
 #     def get(self, id):
@@ -173,7 +173,7 @@ class GuestById(Resource):
     def get(self, id):
         guest = Guest.query.filter_by(id=id).first()
         if guest:
-            return make_response(jsonify(guest.to_dict()), 200)
+            return make_response(guest.to_dict(), 200)
         return {'error': '422 Unprocessable Entity'}, 422
     
 class GuestsByReviewRating(Resource):
@@ -196,7 +196,7 @@ api.add_resource(PropertyById, '/properties/<int:id>', endpoint='properties/id')
 # api.add_resource(SortProsByNumberOfReviews, '/pros/pros_by_number_of_reviews', endpoint='pros/pros_by_number_of_reviews')
 # api.add_resource(FilterProsByNumberOfReviews, '/pro_reviews/<int:n>', endpoint='pro_reviews/n')
 # api.add_resource(ProsReviewedByUser, '/pros/pros_by_user/<string:username>', endpoint='pros/pros_by_user/username')
-# api.add_resource(Reviews, '/reviews', endpoint='reviews')
+api.add_resource(Reviews, '/reviews', endpoint='reviews')
 # api.add_resource(ReviewById, '/reviews/<int:id>', endpoint='reviews/id')
 # api.add_resource(SortReviewsByRating, '/reviews/by_rating', endpoint='reviews/by_rating')
 # api.add_resource(ReviewsByProId, '/reviews/reviews_by_pro/<int:pro_id>', endpoint='reviews/reviews_by_pro/pro_id')

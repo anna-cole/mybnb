@@ -5,6 +5,7 @@ import Reviews from "./Reviews";
 const Property = () => {
   const [property, setProperty] = useState({});
   const [reviews, setReviews] = useState([]);
+  const [isEditing, setIsEditing] = useState(false); 
   const params = useParams();
   const property_id = params.id;
  
@@ -21,6 +22,7 @@ const Property = () => {
   }, [property_id])
 
   const submitNewReview = (newReview) => {
+    setIsEditing(false)
     setReviews([...reviews, newReview])
   }
   
@@ -40,7 +42,7 @@ const Property = () => {
         <li>Location: {property.location}</li>
         <li><strong>${property.price}</strong> night</li>
       </ul>
-      <Reviews submitNewReview={submitNewReview} reviews={reviews} property={property}/>
+      <Reviews submitNewReview={submitNewReview} handleClick={() => setIsEditing(!isEditing)} isEditing={isEditing} reviews={reviews} property={property}/>
     </div>
   )
 }
