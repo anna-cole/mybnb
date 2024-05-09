@@ -1,5 +1,4 @@
 import AddReview from "./AddReview";
-// import ReviewForm from "./ReviewForm";
 
 const Reviews = ({ submitNewReview, handleClick, isEditing, reviews, property }) => {
 
@@ -13,12 +12,10 @@ const Reviews = ({ submitNewReview, handleClick, isEditing, reviews, property })
           <li>Guest: {review.guest.name}</li>
         </ul>
       )}
-      <button onClick={handleClick}>Add a review</button>
+      <button className="submit-button" onClick={handleClick}>Add a review</button>
       {isEditing ? (
         <AddReview property={property} submitNewReview={submitNewReview} />
       ) : null}
-      {/* <h3>Add a review for this property</h3> */}
-      {/* <ReviewForm pro={pro} submitNewReview={submitNewReview}/> */}
     </div>
   )
 }

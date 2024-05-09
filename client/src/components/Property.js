@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import AddBooking from "./AddBooking";
 import Reviews from "./Reviews";
 
 const Property = () => {
@@ -43,6 +44,7 @@ const Property = () => {
         <li><strong>${property.price}</strong> night</li>
       </ul>
       <Reviews submitNewReview={submitNewReview} handleClick={() => setIsEditing(!isEditing)} isEditing={isEditing} reviews={reviews} property={property}/>
+      <AddBooking />
     </div>
   )
 }
