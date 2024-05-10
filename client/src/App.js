@@ -50,6 +50,11 @@ const App = () => {
     setBookings([...bookings, newBooking])
   }
 
+  const deleteBooking = id => {
+    const updatedBookings = bookings.filter(booking => booking.id !== id)
+    setBookings(updatedBookings)
+  }
+
   return (
     <Router>
       <Navbar logout={logout} loggedIn={loggedIn} />
@@ -60,7 +65,7 @@ const App = () => {
         <Route path="/signup" element={<Signup login={login} />} />
         <Route path="/properties" element={<Properties properties={properties} currentUser={currentUser}/>} />
         <Route path="/properties/:id" element={<Property submitNewBooking={submitNewBooking} />} />
-        <Route path="/bookings" element={<GuestBookings currentUser={currentUser} bookings={bookings} setBookings={setBookings}/>} />
+        <Route path="/bookings" element={<GuestBookings currentUser={currentUser} bookings={bookings} deleteBooking={deleteBooking}/>} />
       </Routes>
     </Router>
   )

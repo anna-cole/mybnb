@@ -187,6 +187,29 @@ class Bookings(Resource):
         except IntegrityError:   
             return {'error': '422 Unprocessable Entity'}, 422
 
+class BookingById(Resource):
+
+    def get(self, id):
+        booking = Booking.query.filter_by(id=id).first()
+        if booking:
+            return make_response(booking.to_dict(), 200)
+        return {'error': '422 Unprocessable Entity'}, 422
+       
+    def patch(self, id):
+        booking = Booking.query.filter_by(id=id).first()
+        for attr in request.get_json():
+            setattr(booking, attr, request.get_json()[attr])
+        db.session.add(booking) 
+        db.session.commit()
+        return make_response(booking.to_dict(), 200)
+    
+    def delete(self, id):
+        booking = Booking.query.filter_by(id=id).first()
+        db.session.delete(booking)
+        db.session.commit()
+        response_body = {"message": ''}
+        return make_response(response_body, 204)
+
 class Guests(Resource):
     def get(self):        
         guests = Guest.query.all()
@@ -226,6 +249,7 @@ api.add_resource(Reviews, '/reviews', endpoint='reviews')
 # api.add_resource(ReviewsByUser, '/reviews/reviews_by_user/<string:username>', endpoint='reviews/reviews_by_user/username')
 # api.add_resource(ReviewsByContent, '/reviews/search_by_content/<string:content>', endpoint='reviews/search_by_content/content')
 api.add_resource(Bookings, '/bookings', endpoint='bookings')
+api.add_resource(BookingById, '/bookings/<int:id>', endpoint='bookings/id')
 api.add_resource(Guests, '/guests', endpoint='guests') 
 api.add_resource(GuestById, '/guests/<int:id>', endpoint='guests/id')
 api.add_resource(GuestsByReviewRating, '/guests/guests_by_review_rating/<int:rating>', endpoint='guests/guests_by_review_rating/rating') 

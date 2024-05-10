@@ -1,4 +1,6 @@
-const GuestBokings = ({ currentUser, bookings }) => {
+import BookingCard from './BookingCard'; 
+
+const GuestBokings = ({ currentUser, bookings, deleteBooking }) => {
 
   if (!currentUser) return <h2>Please login to see your bookings</h2>
 
@@ -7,18 +9,7 @@ const GuestBokings = ({ currentUser, bookings }) => {
   return (
     <div className="app">
       <h2 className="user-bookings">{currentUser.name}'s trips:</h2>
-      {guestBookings.map(booking => 
-      <ul>
-        <li key={booking.id}>
-          Check in: {booking.check_in}<br/>
-          Check out: {booking.check_out}<br/>
-          Accomodation: {booking.property.title}<br/>
-          Location: {booking.property.location}<br/>
-          <button className="booking-buttons">Delete</button>&nbsp;
-          <button className="booking-buttons">Edit</button>
-        </li>
-      </ul>
-      )}
+      {guestBookings.map(booking => <BookingCard key={booking.id} booking={booking} deleteBooking={deleteBooking} />)}
     </div>
   )
 }
