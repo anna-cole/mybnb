@@ -208,7 +208,7 @@ li h1 {
 
 .booking-box {
   width: 200px;
-  padding: 20px 5px 20px 20px;
+  padding: 10px 5px 5px 20px;
   box-shadow: rgba(0, 0, 0, 0.30) 0px 6px 16px;
   border-radius: 15px; 
 }
@@ -221,7 +221,6 @@ li h1 {
 input[type="date"],
 button {
   width: 80%;
-  padding: 10px;
   margin-bottom: 10px;
 }
 

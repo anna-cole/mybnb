@@ -6,9 +6,7 @@ const Error = () => {
   const displayError = <p style={{color: "red"}}>{error}</p>
   
   return (
-    <>
-      { error ? displayError : null }
-    </>
+    <>{ error ? displayError : null }</>
   )
 }
 

@@ -7,12 +7,13 @@ import Properties from './components/Properties';
 import Navbar from './components/Navbar';
 import Error from './components/Error';
 import Property from './components/Property';
-// import ProForm from './components/ProForm';
+import GuestBookings from './components/GuestBookings';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [properties, setProperties] = useState([]);
+  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     fetch("/check_session")
@@ -39,6 +40,10 @@ const App = () => {
     setLoggedIn(false)
   }
 
+  const submitNewBooking = (newBooking) => {
+    setBookings([...bookings, newBooking])
+  }
+
   return (
     <Router>
       <Navbar logout={logout} loggedIn={loggedIn} />
@@ -48,8 +53,8 @@ const App = () => {
         <Route path="/login" element={<Login login={login} />} />
         <Route path="/signup" element={<Signup login={login} />} />
         <Route path="/properties" element={<Properties properties={properties} currentUser={currentUser}/>} />
-        <Route path="/properties/:id" element={<Property />} />
-        {/* <Route path="/newpro" element={<ProForm addPro={addPro} setErrors={setErrors} />} /> */}
+        <Route path="/properties/:id" element={<Property submitNewBooking={submitNewBooking} />} />
+        <Route path="/guest_bookings" element={<GuestBookings currentUser={currentUser} />} />
       </Routes>
     </Router>
   )

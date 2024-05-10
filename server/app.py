@@ -6,6 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 from config import app, db, api
 from models import Guest, Booking, Property, Review
+from datetime import datetime
 
 @app.route('/')
 def index():
@@ -164,6 +165,28 @@ class Reviews(Resource):
 #         reviews = Review.query.all()
 #         return [review.to_dict() for review in reviews if content.lower() in review.content.lower()], 200
 
+class Bookings(Resource):
+    def get(self):       
+        bookings = Booking.query.all()
+        return [booking.to_dict() for booking in bookings], 200
+    
+    def post(self):
+        # Convert the date strings to Python date objects
+        check_in_date = datetime.strptime(request.get_json()["check_in"], "%Y-%m-%d").date()
+        check_out_date = datetime.strptime(request.get_json()["check_out"], "%Y-%m-%d").date()
+        # Perform the database insertion using the updated data
+        check_in = check_in_date
+        check_out = check_out_date
+        property_id = request.get_json().get('property_id') 
+        guest_id = session.get('guest_id')
+        try:
+            booking = Booking(check_in=check_in, check_out=check_out, property_id=property_id, guest_id=guest_id)
+            db.session.add(booking)
+            db.session.commit()
+            return booking.to_dict(), 201 
+        except IntegrityError:   
+            return {'error': '422 Unprocessable Entity'}, 422
+
 class Guests(Resource):
     def get(self):        
         guests = Guest.query.all()
@@ -202,6 +225,7 @@ api.add_resource(Reviews, '/reviews', endpoint='reviews')
 # api.add_resource(ReviewsByProId, '/reviews/reviews_by_pro/<int:pro_id>', endpoint='reviews/reviews_by_pro/pro_id')
 # api.add_resource(ReviewsByUser, '/reviews/reviews_by_user/<string:username>', endpoint='reviews/reviews_by_user/username')
 # api.add_resource(ReviewsByContent, '/reviews/search_by_content/<string:content>', endpoint='reviews/search_by_content/content')
+api.add_resource(Bookings, '/bookings', endpoint='bookings')
 api.add_resource(Guests, '/guests', endpoint='guests') 
 api.add_resource(GuestById, '/guests/<int:id>', endpoint='guests/id')
 api.add_resource(GuestsByReviewRating, '/guests/guests_by_review_rating/<int:rating>', endpoint='guests/guests_by_review_rating/rating') 
