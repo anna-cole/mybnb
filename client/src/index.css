@@ -236,6 +236,27 @@ button:hover {
   background-color: #0056b3;
 }
 
+.user-bookings {
+  font-weight: bold;
+  font-size: 1.7em;
+  color: rgb(6, 145, 188);
+  position: relative;
+  top: -10px;
+}
+
+.booking-buttons {
+  color: black;
+  cursor: pointer;
+  background-color: #F0F0F0;
+  margin: 0em;
+  padding: 1px 6px;
+  border-width: 1px;
+  border-style: outset;
+  border-color: black;
+  font-size: 14px;
+  width: auto
+}
+
 
 
 

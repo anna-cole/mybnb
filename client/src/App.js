@@ -30,6 +30,12 @@ const App = () => {
       .then(properties => setProperties(properties))
   }, [])
 
+  useEffect(() => {
+    fetch("/bookings")
+      .then(resp => resp.json())
+      .then(bookings => setBookings(bookings))
+  }, [])
+
   const login = guest => {
     setCurrentUser(guest)
     setLoggedIn(true)
@@ -54,7 +60,7 @@ const App = () => {
         <Route path="/signup" element={<Signup login={login} />} />
         <Route path="/properties" element={<Properties properties={properties} currentUser={currentUser}/>} />
         <Route path="/properties/:id" element={<Property submitNewBooking={submitNewBooking} />} />
-        <Route path="/guest_bookings" element={<GuestBookings currentUser={currentUser} />} />
+        <Route path="/bookings" element={<GuestBookings currentUser={currentUser} bookings={bookings} setBookings={setBookings}/>} />
       </Routes>
     </Router>
   )

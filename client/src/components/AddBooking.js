@@ -33,7 +33,7 @@ const AddBooking = ({ property, submitNewBooking }) => {
         if (r.ok) {
           r.json().then(booking => {
             submitNewBooking(booking)
-            navigate("/guest_bookings")
+            navigate("/bookings")
             // console.log("Booking after fetch:", booking);
           })
         } 
