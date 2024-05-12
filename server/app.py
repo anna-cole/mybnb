@@ -171,12 +171,9 @@ class Bookings(Resource):
         return [booking.to_dict() for booking in bookings], 200
     
     def post(self):
-        # Convert the date strings to Python date objects
-        check_in_date = datetime.strptime(request.get_json()["check_in"], "%Y-%m-%d").date()
-        check_out_date = datetime.strptime(request.get_json()["check_out"], "%Y-%m-%d").date()
-        # Perform the database insertion using the updated data
-        check_in = check_in_date
-        check_out = check_out_date
+        # Convert the date strings to Python date objects (request.get_json() pulls data in strings)
+        check_in = datetime.strptime(request.get_json()["check_in"], "%Y-%m-%d").date()
+        check_out = datetime.strptime(request.get_json()["check_out"], "%Y-%m-%d").date()
         property_id = request.get_json().get('property_id') 
         guest_id = session.get('guest_id')
         try:

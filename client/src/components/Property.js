@@ -22,7 +22,7 @@ const Property = ({ addBooking }) => {
     })
   }, [property_id])
 
-  const submitNewReview = (newReview) => {
+  const addReview = (newReview) => {
     setIsEditing(false)
     setReviews([...reviews, newReview])
   }
@@ -43,7 +43,7 @@ const Property = ({ addBooking }) => {
         <li>Location: {property.location}</li>
         <li><strong>${property.price}</strong> night</li>
       </ul>
-      <Reviews submitNewReview={submitNewReview} handleClick={() => setIsEditing(!isEditing)} isEditing={isEditing} reviews={reviews} property={property}/>
+      <Reviews addReview={addReview} handleClick={() => setIsEditing(!isEditing)} isEditing={isEditing} reviews={reviews} property={property}/>
       <AddBooking property={property} addBooking={addBooking} />
     </div>
   )

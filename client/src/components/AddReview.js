@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-const AddReview = ({ property, submitNewReview }) => {
+const AddReview = ({ property, addReview }) => {
 
   const formSchema = yup.object().shape({
     rating: yup.number().required("Must enter rating").positive().integer().typeError('Please enter an Integer').max(10),
@@ -29,7 +29,7 @@ const AddReview = ({ property, submitNewReview }) => {
       }).then(r => {
         if (r.ok) {
           r.json().then(review => {
-            submitNewReview(review)
+            addReview(review)
             formik.resetForm()
             // console.log("Review after fetch:", review);
           })

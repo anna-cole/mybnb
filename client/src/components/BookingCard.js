@@ -22,7 +22,7 @@ const BookingCard = ({ booking, deleteBooking, updateBooking }) => {
       Accomodation: {booking.property.title}<br/>
       Location: {booking.property.location}<br/>
       <button className="booking-buttons" onClick={handleDelete}>Delete</button>&nbsp;
-      <button className="booking-buttons" onClick={() => setIsEditing((isEditing) => !isEditing)}>Edit</button>
+      <button className="booking-buttons" onClick={() => setIsEditing(!isEditing)}>Edit</button>
       {isEditing ? (<EditBooking booking={booking} handleUpdate={handleUpdate} />) : null}
     </li>
   </ul>

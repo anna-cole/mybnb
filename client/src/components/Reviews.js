@@ -1,6 +1,6 @@
 import AddReview from "./AddReview";
 
-const Reviews = ({ submitNewReview, handleClick, isEditing, reviews, property }) => {
+const Reviews = ({ addReview, handleClick, isEditing, reviews, property }) => {
 
   return (
     <div className="app">
@@ -14,7 +14,7 @@ const Reviews = ({ submitNewReview, handleClick, isEditing, reviews, property })
       )}
       <button className="submit-button" onClick={handleClick}>Add a review</button>
       {isEditing ? (
-        <AddReview property={property} submitNewReview={submitNewReview} />
+        <AddReview property={property} addReview={addReview} />
       ) : null}
     </div>
   )
