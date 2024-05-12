@@ -1,10 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-const AddBooking = ({ property, addBooking }) => {
-
-  const navigate = useNavigate();
+const EditBooking = ({ booking, handleUpdate }) => {
 
   const formSchema = yup.object().shape({
     check_in: yup.date().required("Must enter a date"),
@@ -13,32 +10,26 @@ const AddBooking = ({ property, addBooking }) => {
 
   const formik = useFormik({
     initialValues: {
-      check_in: "",
-      check_out: "",
+      check_in: booking.check_in,
+      check_out: booking.check_out,
     },
     validationSchema: formSchema,
     onSubmit: (values) => {
-      const bookingData = {
-        ...values,
-        property_id : property.id, 
-      };
-      // console.log("Booking before fetch:", bookingData);
-      fetch("/bookings", {
-        method: "POST",
+      // console.log("Booking before fetch:", values);
+      fetch(`/bookings/${booking.id}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(bookingData, null, 2),
+        body: JSON.stringify(values, null, 2),
       }).then(r => {
         if (r.ok) {
-          r.json().then(booking => {
-            addBooking(booking)
-            navigate("/bookings")
-            // console.log("Booking after fetch:", booking);
+          r.json().then(updatedBookingObj => {
+            handleUpdate(updatedBookingObj)
+            // console.log("Booking after fetch:", updatedBookingObj);
           })
         } 
       })
-      .catch((error) => console.log("Error:", error));
     }
   })
 
@@ -71,4 +62,4 @@ const AddBooking = ({ property, addBooking }) => {
   )
 }
 
-export default AddBooking
+export default EditBooking

@@ -197,8 +197,15 @@ class BookingById(Resource):
        
     def patch(self, id):
         booking = Booking.query.filter_by(id=id).first()
-        for attr in request.get_json():
+        # request.get_json() pulls the data in strings
+        for attr in request.get_json(): 
             setattr(booking, attr, request.get_json()[attr])
+        # Convert the date strings to Python date objects to be accepted by the db
+        check_in = datetime.strptime(request.get_json()["check_in"], "%Y-%m-%d").date()
+        check_out = datetime.strptime(request.get_json()["check_out"], "%Y-%m-%d").date()
+        # Update the booking object attributes with the converted date objects
+        booking.check_in = check_in
+        booking.check_out = check_out
         db.session.add(booking) 
         db.session.commit()
         return make_response(booking.to_dict(), 200)

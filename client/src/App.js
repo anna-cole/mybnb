@@ -7,7 +7,7 @@ import Properties from './components/Properties';
 import Navbar from './components/Navbar';
 import Error from './components/Error';
 import Property from './components/Property';
-import GuestBookings from './components/GuestBookings';
+import Bookings from './components/Bookings';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -46,12 +46,23 @@ const App = () => {
     setLoggedIn(false)
   }
 
-  const submitNewBooking = (newBooking) => {
+  const addBooking = (newBooking) => {
     setBookings([...bookings, newBooking])
   }
 
   const deleteBooking = id => {
     const updatedBookings = bookings.filter(booking => booking.id !== id)
+    setBookings(updatedBookings)
+  }
+
+  const updateBooking = updatedBookingObj => {
+    const updatedBookings = bookings.map(booking => {
+      if (booking.id === updatedBookingObj.id) {
+        return updatedBookingObj
+      } else {
+        return booking
+      }
+    })
     setBookings(updatedBookings)
   }
 
@@ -64,8 +75,8 @@ const App = () => {
         <Route path="/login" element={<Login login={login} />} />
         <Route path="/signup" element={<Signup login={login} />} />
         <Route path="/properties" element={<Properties properties={properties} currentUser={currentUser}/>} />
-        <Route path="/properties/:id" element={<Property submitNewBooking={submitNewBooking} />} />
-        <Route path="/bookings" element={<GuestBookings currentUser={currentUser} bookings={bookings} deleteBooking={deleteBooking}/>} />
+        <Route path="/properties/:id" element={<Property addBooking={addBooking} />} />
+        <Route path="/bookings" element={<Bookings currentUser={currentUser} bookings={bookings} deleteBooking={deleteBooking} updateBooking={updateBooking} />} />
       </Routes>
     </Router>
   )
