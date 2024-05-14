@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { UserProvider } from './context/UserContext';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -10,19 +11,8 @@ import Property from './components/Property';
 import Bookings from './components/Bookings';
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
   const [properties, setProperties] = useState([]);
   const [bookings, setBookings] = useState([]);
-
-  useEffect(() => {
-    fetch("/check_session")
-    .then(r => {
-      if (r.ok) {
-        r.json().then(guest => login(guest))
-      }
-    })
-  }, [])
 
   useEffect(() => {
     fetch("/properties")
@@ -35,16 +25,6 @@ const App = () => {
       .then(resp => resp.json())
       .then(bookings => setBookings(bookings))
   }, [])
-
-  const login = guest => {
-    setCurrentUser(guest)
-    setLoggedIn(true)
-  }
-
-  const logout = () => {
-    setCurrentUser(null)
-    setLoggedIn(false)
-  }
 
   const addBooking = (newBooking) => {
     setBookings([...bookings, newBooking])
@@ -68,16 +48,18 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar logout={logout} loggedIn={loggedIn} />
-      <Error />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login login={login} />} />
-        <Route path="/signup" element={<Signup login={login} />} />
-        <Route path="/properties" element={<Properties properties={properties} currentUser={currentUser}/>} />
-        <Route path="/properties/:id" element={<Property addBooking={addBooking} />} />
-        <Route path="/bookings" element={<Bookings currentUser={currentUser} bookings={bookings} deleteBooking={deleteBooking} updateBooking={updateBooking} />} />
-      </Routes>
+      <UserProvider>
+        <Navbar />
+        <Error />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/properties" element={<Properties properties={properties}/>} />
+          <Route path="/properties/:id" element={<Property addBooking={addBooking} />} />
+          <Route path="/bookings" element={<Bookings bookings={bookings} deleteBooking={deleteBooking} updateBooking={updateBooking} />} />
+        </Routes>
+      </UserProvider>
     </Router>
   )
 }

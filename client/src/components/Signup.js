@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react';
-import { ErrorContext } from '../context/error';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { UserContext } from '../context/UserContext';
 
-const Signup = ({ login }) => {
-  const { error, setError } = useContext(ErrorContext);
+const Signup = () => {
+  const { login, error, setError } = useContext(UserContext);
 
   useEffect(() => {
     return () => {

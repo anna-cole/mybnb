@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext";
 import SearchProperty from "./SearchProperty";
 import PropertyCard from './PropertyCard';
 
-const Properties = ({ properties, currentUser }) => {
+
+const Properties = ({ properties }) => {
   const [search, setSearch] = useState('');
+  const { currentUser } = useContext(UserContext);
 
   const propertiesToDisplay = properties.filter(property => property.title.toLowerCase().includes(search.toLowerCase()) || property.location.toLowerCase().includes(search.toLowerCase()))
 

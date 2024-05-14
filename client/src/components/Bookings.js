@@ -1,6 +1,10 @@
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 import BookingCard from './BookingCard'; 
 
-const Bookings = ({ currentUser, bookings, deleteBooking, updateBooking }) => {
+
+const Bookings = ({ bookings, deleteBooking, updateBooking }) => {
+  const { currentUser } = useContext(UserContext);
 
   if (!currentUser) return <h2>Please login to see your bookings</h2>
 

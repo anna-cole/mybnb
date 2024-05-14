@@ -48,8 +48,8 @@ class Login(Resource):
 class Logout(Resource):
     def delete(self):
         if session['guest_id']:
-            session['guest_id'] = None
-            return {}, 204
+            del session['guest_id']
+            return {'message': 'You are not logged in.'}, 200
         return {'error': '401 Unauthorized'}, 401
        
 class Properties(Resource):
