@@ -23,8 +23,8 @@ const BookingCard = ({ booking }) => {
       Check out: {booking.check_out}<br/>
       Accomodation: {booking.property.title}<br/>
       Location: {booking.property.location}<br/>
-      <button className="booking-buttons" onClick={handleDelete}>Delete</button>&nbsp;
-      <button className="booking-buttons" onClick={() => setIsEditing(!isEditing)}>Edit</button>
+      <button className='default-button' onClick={handleDelete}>Delete</button>&nbsp;
+      <button className='default-button' onClick={() => setIsEditing(!isEditing)}>Edit</button>
       {isEditing ? (<EditBooking booking={booking} handleUpdate={handleUpdate} />) : null}
     </li>
   </ul>

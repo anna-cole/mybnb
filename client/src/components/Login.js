@@ -78,7 +78,7 @@ const Login = () => {
         <button type="submit" className="submit-button">Log in</button>
       </form>
       <p> Don't have an account? &nbsp;
-        <button color="secondary" onClick={() => navigate("/signup")}>
+        <button className='default-button' onClick={() => navigate("/signup")}>
           Sign Up
         </button>
       </p>

@@ -97,7 +97,7 @@ const Signup = () => {
         <button type="submit" className="submit-button">Create account</button>
       </form>
       <p> Already have an account? &nbsp;
-        <button color="secondary" onClick={() => navigate("/login")}>
+        <button className='default-button' onClick={() => navigate("/login")}>
           Log In
         </button>
       </p>
