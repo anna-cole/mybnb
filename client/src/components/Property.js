@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import AddBooking from "./AddBooking";
 import Reviews from "./Reviews";
 
-const Property = ({ addBooking }) => {
+const Property = () => {
   const [property, setProperty] = useState({});
   const [reviews, setReviews] = useState([]);
   const [isEditing, setIsEditing] = useState(false); 
@@ -44,7 +44,7 @@ const Property = ({ addBooking }) => {
         <li><strong>${property.price}</strong> night</li>
       </ul>
       <Reviews addReview={addReview} handleClick={() => setIsEditing(!isEditing)} isEditing={isEditing} reviews={reviews} property={property}/>
-      <AddBooking property={property} addBooking={addBooking} />
+      <AddBooking property={property} />
     </div>
   )
 }

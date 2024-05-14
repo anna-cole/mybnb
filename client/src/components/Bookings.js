@@ -1,10 +1,12 @@
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
+import { BookingsContext } from '../context/BookingsContext';
 import BookingCard from './BookingCard'; 
 
 
-const Bookings = ({ bookings, deleteBooking, updateBooking }) => {
+const Bookings = () => {
   const { currentUser } = useContext(UserContext);
+  const { bookings } = useContext(BookingsContext);
 
   if (!currentUser) return <h2>Please login to see your bookings</h2>
 
@@ -13,7 +15,7 @@ const Bookings = ({ bookings, deleteBooking, updateBooking }) => {
   return (
     <div className="app">
       <h2 className="user-bookings">{currentUser.name}'s trips:</h2>
-      {guestBookings.map(booking => <BookingCard key={booking.id} booking={booking} deleteBooking={deleteBooking} updateBooking={updateBooking}/>)}
+      {guestBookings.map(booking => <BookingCard key={booking.id} booking={booking} />)}
     </div>
   )
 }

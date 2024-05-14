@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { BookingsContext } from '../context/BookingsContext';
 import EditBooking from "./EditBooking";
 
-const BookingCard = ({ booking, deleteBooking, updateBooking }) => {
+const BookingCard = ({ booking }) => {
   const [isEditing, setIsEditing] = useState(false); 
+  const { deleteBooking, updateBooking } = useContext(BookingsContext);
 
   const handleDelete = () => {
     fetch(`/bookings/${booking.id}`, {method: "DELETE"})

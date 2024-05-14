@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { BookingsContext } from '../context/BookingsContext';
 
-const AddBooking = ({ property, addBooking }) => {
-
+const AddBooking = ({ property }) => {
   const navigate = useNavigate();
+  const { addBooking } = useContext(BookingsContext);
 
   const formSchema = yup.object().shape({
     check_in: yup.date().required("Must enter a date"),
