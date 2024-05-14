@@ -3,7 +3,6 @@ import { UserContext } from '../context/UserContext';
 import { BookingsContext } from '../context/BookingsContext';
 import BookingCard from './BookingCard'; 
 
-
 const Bookings = () => {
   const { currentUser } = useContext(UserContext);
   const { bookings } = useContext(BookingsContext);

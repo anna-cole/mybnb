@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import AddBooking from "./AddBooking";
 import Reviews from "./Reviews";
+import AddReview from "./AddReview";
+import AddBooking from "./AddBooking";
 
 const Property = () => {
   const [property, setProperty] = useState({});
@@ -43,7 +44,9 @@ const Property = () => {
         <li>Location: {property.location}</li>
         <li><strong>${property.price}</strong> night</li>
       </ul>
-      <Reviews addReview={addReview} handleClick={() => setIsEditing(!isEditing)} isEditing={isEditing} reviews={reviews} property={property}/>
+      <Reviews reviews={reviews} />
+      <button className="submit-button" onClick={() => setIsEditing(!isEditing)}>Add a review</button>
+      {isEditing ? (<AddReview addReview={addReview} property={property} />) : null}
       <AddBooking property={property} />
     </div>
   )

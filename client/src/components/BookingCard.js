@@ -3,7 +3,7 @@ import { BookingsContext } from '../context/BookingsContext';
 import EditBooking from "./EditBooking";
 
 const BookingCard = ({ booking }) => {
-  const [isEditing, setIsEditing] = useState(false); 
+  const [isEditing, setIsEditing] = useState(false);
   const { deleteBooking, updateBooking } = useContext(BookingsContext);
 
   const handleDelete = () => {
