@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import Reviews from "./Reviews";
 import AddReview from "./AddReview";
@@ -10,8 +10,8 @@ const Property = () => {
   const [reviews, setReviews] = useState([]);
   const [openForm, setOpenForm] = useState(false); 
   const params = useParams();
-  const property_id = params.id;
- 
+  const property_id = params.id
+
   useEffect(() => {
     fetch(`/properties/${property_id}`)
     .then(r => {
@@ -28,7 +28,7 @@ const Property = () => {
     setOpenForm(false)
     setReviews([...reviews, newReview])
   }
-  
+
   if (!property) return <h2>Loading...</h2>
 
   const totalRating = reviews.reduce((accumulator, review) => accumulator + review.rating, 0); 
@@ -47,7 +47,7 @@ const Property = () => {
       </ul>
       <Reviews reviews={reviews} />
       <button className="submit-button" onClick={() => setOpenForm(!openForm)}>Add a review</button>
-      {openForm ? (<AddReview addReview={addReview} property={property} />) : null}
+      {openForm ? <AddReview property={property} addReview={addReview} /> : null}
       <AddBooking property={property} />
       <Map />
     </div>
