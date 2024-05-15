@@ -125,7 +125,7 @@ input {
   font-family: inherit;
   font-size: 1.2em;
   border: 2px solid lightgray;
-  width:460px;
+  width:350px;
 }
 
 #error-login {
@@ -139,7 +139,6 @@ p {
   letter-spacing: -.025rem;
   line-height: 25px;
   max-width: 500px;
-  margin: 20px 0 20px 0;
 }
 
 li h1 {
