@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 import Reviews from "./Reviews";
 import AddReview from "./AddReview";
 import AddBooking from "./AddBooking";
+import Map from "./Map";
 
 const Property = () => {
   const [property, setProperty] = useState({});
   const [reviews, setReviews] = useState([]);
-  const [isEditing, setIsEditing] = useState(false); 
+  const [openForm, setOpenForm] = useState(false); 
   const params = useParams();
   const property_id = params.id;
  
@@ -24,7 +25,7 @@ const Property = () => {
   }, [property_id])
 
   const addReview = (newReview) => {
-    setIsEditing(false)
+    setOpenForm(false)
     setReviews([...reviews, newReview])
   }
   
@@ -37,7 +38,7 @@ const Property = () => {
   
   return (
     <div className="app">
-      <h2>{property.title}</h2>
+      <h3>{property.title}</h3>
       <img className="background-image" src={image} alt={property.id} width="400" height="300" />
       <ul>
         <li>Average rating: {totalRating ? `${averageRating} ${stars}` : null}</li>
@@ -45,9 +46,10 @@ const Property = () => {
         <li><strong>${property.price}</strong> night</li>
       </ul>
       <Reviews reviews={reviews} />
-      <button className="submit-button" onClick={() => setIsEditing(!isEditing)}>Add a review</button>
-      {isEditing ? (<AddReview addReview={addReview} property={property} />) : null}
+      <button className="submit-button" onClick={() => setOpenForm(!openForm)}>Add a review</button>
+      {openForm ? (<AddReview addReview={addReview} property={property} />) : null}
       <AddBooking property={property} />
+      <Map />
     </div>
   )
 }
