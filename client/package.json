@@ -15,7 +15,8 @@
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
     "web-vitals": "^2.1.4",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "google-maps-react": "2.0.6"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"

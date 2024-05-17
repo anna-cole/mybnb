@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Reviews from "./Reviews";
 import AddReview from "./AddReview";
 import AddBooking from "./AddBooking";
-import Map from "./Map";
+import GoogleMap from "./GoogleMap";
 
 const Property = () => {
   const [property, setProperty] = useState({});
@@ -49,7 +49,7 @@ const Property = () => {
       <button className="submit-button" onClick={() => setOpenForm(!openForm)}>Add a review</button>
       {openForm ? <AddReview property={property} addReview={addReview} /> : null}
       <AddBooking property={property} />
-      <Map />
+      <GoogleMap property={property}/>
     </div>
   )
 }

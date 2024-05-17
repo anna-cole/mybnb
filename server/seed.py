@@ -56,13 +56,26 @@ if __name__ == '__main__':
             "./tree_house4.png",
             "./tree_house5.png",
         ]
+        locations = [
+            "Los Angeles", 
+            "Rio de Janeiro", 
+            "Houston", 
+            "Honolulu", 
+            "San Francisco", 
+            "Camboinhas", 
+            "Orlando", 
+            "Miami", 
+            "Salvador",
+            "Seattle",
+        ]
         properties = []
 
         for i in range(10):
 
             property = Property(
                 title=fake.paragraph(nb_sentences=1),
-                location=fake['en-US'].city(),
+                # location=fake['en-US'].city(),
+                location=rc(locations),
                 price=fake.pydecimal(left_digits=2, right_digits=2, positive=True),
                 image_url=rc(images),
                 # image_url=fake.image_url(width=50, height=50),
