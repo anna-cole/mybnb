@@ -53,69 +53,81 @@ class Logout(Resource):
         return {'error': '401 Unauthorized'}, 401
        
 class Properties(Resource):
+
     def get(self):        
         properties = Property.query.all()
         resp = [property.to_dict() for property in properties]
         return make_response(resp, 200)
-
+    
+    def post(self):
+        title = request.get_json().get('title')
+        location = request.get_json().get('location')
+        price = request.get_json().get('price')
+        image_url = request.get_json().get('image_url')
+        try:
+            property = Property(title=title, location=location, price=price, image_url=image_url)
+            db.session.add(property)
+            db.session.commit()
+            return property.to_dict(), 201 
+        except IntegrityError:   
+            return {'error': '422 Unprocessable Entity'}, 422
+    
 class PropertyById(Resource):
+
     def get(self, id):
         property = Property.query.filter_by(id=id).first()
         if property:
             return make_response(property.to_dict(), 200)
         return {'error': '422 Unprocessable Entity'}, 422
     
-# class ProByName(Resource):
-#     def get(self, name):
-#         pros = Pro.query.all()
-#         return [pro.to_dict() for pro in pros if pro.name.lower() == name.lower()], 200
+    def patch(self, id):
+        property = Property.query.filter_by(id=id).first()
+        for attr in request.get_json():
+            setattr(property, attr, request.get_json()[attr])
+        db.session.add(property) 
+        db.session.commit()
+        return make_response(property.to_dict(), 200)
     
-# class ProsByService(Resource):
-#     def get(self, service):
-#         pros = Pro.query.filter(Pro.service==service).all()
-#         return [pro.to_dict() for pro in pros], 200
+    def delete(self, id):
+        property = Property.query.filter_by(id=id).first()
+        db.session.delete(property)
+        db.session.commit()
+        response_body = {"message": ''}
+        return make_response(response_body, 204)
     
-# class ProsByAverageRating(Resource):
-#     def get(self, average_rating):
-#         pros = Pro.query.filter_by(average_rating=average_rating).all()
-#         return [pro.to_dict() for pro in pros], 200
+class PropertyByTitle(Resource):
+    def get(self, title):
+        properties = Property.query.all()
+        return [property.to_dict() for property in properties if property.title.lower() == title.lower()], 200
     
-# class SortProsByAverageRating(Resource):
-#     def get(self):
-#         # pros = Pro.query.order_by(desc('average_rating')).all() # need to import desc
-#         # return [pro.to_dict() for pro in pros], 200
-#         pros = Pro.query.order_by(Pro.average_rating.desc()).all() # you can use asc for ascending
-#         return [pro.to_dict() for pro in pros], 200
+class PropertiesByLocation(Resource):
+    def get(self, location):
+        properties = Property.query.filter(Property.location==location).all()
+        return [property.to_dict() for property in properties], 200
     
-# class BestPro(Resource):
-#     def get(self):
-#         pro = Pro.query.order_by(desc('average_rating')).first() 
-#         return pro.to_dict(), 200
+class SortPropertiesByPrice(Resource):
+    def get(self):
+        # properties = Property.query.order_by(desc('price')).all() # need to import desc
+        # return [property.to_dict() for property in properties], 200
+        properties = Property.query.order_by(Property.price.asc()).all() # you can use desc for descending
+        return [property.to_dict() for property in properties], 200
     
-# class ProsByReviewRating(Resource):
-#     def get(self, rating):
-#         reviews = Review.query.filter_by(rating=rating).all()
-#         return [review.pro.to_dict(only=('id', 'name', 'service', 'reviews.rating',)) for review in reviews], 200
-#     # def get(self):
-#     # reviews = Review.query.all()
-#     # return [review.pro.to_dict(only=('id', 'name')) for review in reviews if review.rating == 10], 200 
+class MostExpensiveProperty(Resource):
+    def get(self):
+        property = Property.query.order_by(desc('price')).first() 
+        return property.to_dict(), 200
 
-# class SortProsByNumberOfReviews(Resource):
-#     def get(self):
-#         pros = Pro.query.all()
-#         pros.sort(reverse=True, key=lambda pro: len(pro.reviews)) # Python sort() method, it doesn't return anything, it only sorts the original list, so don't save it in a variable.
-#         return [pro.to_dict() for pro in pros], 200
+class SortPropertiesByNumberOfReviews(Resource):
+    def get(self):
+        properties = Property.query.all()
+        properties.sort(reverse=True, key=lambda property: len(property.reviews)) # Python sort() method, it doesn't return anything, it only sorts the original list, so don't save it in a variable.
+        return [property.to_dict() for property in properties], 200
     
-# class FilterProsByNumberOfReviews(Resource):
-#     def get(self, n):
-#         pros = Pro.query.all()
-#         filtered_list = filter(lambda pro: len(pro.reviews) >= n, pros)  # to filter the pros whose reviews are equal or greater than n, use the Python filter function. It returns a new list, so to work you need to save it in a variable, otherwise you will get the original list. filtered_list = filter(function, list)
-#         return [pro.to_dict(only=('name', 'reviews.content', 'reviews.rating')) for pro in filtered_list], 200
-    
-# class ProsReviewedByUser(Resource):
-#     def get(self, username):
-#         user = User.query.filter_by(username=username).first()
-#         return [pro.to_dict(only=('id', 'name', 'reviews.content', 'reviews.user.username', 'reviews.rating',)) for pro in user.pros], 200
+class FilterPropertiesByNumberOfReviews(Resource):
+    def get(self, n):
+        properties = Property.query.all()
+        filtered_list = filter(lambda property: len(property.reviews) >= n, properties)  # to filter the properties whose reviews are equal or greater than n, use the Python filter function. It returns a new list, so to work you need to save it in a variable, otherwise it will return the original list. filtered_list = filter(function, list)
+        return [property.to_dict(only=('title', 'reviews.content', 'reviews.rating')) for property in filtered_list], 200
         
 class Reviews(Resource):
     def get(self):       
@@ -135,35 +147,35 @@ class Reviews(Resource):
         except IntegrityError:   
             return {'error': '422 Unprocessable Entity'}, 422
         
-# class ReviewById(Resource):
-#     def get(self, id):
-#         review = Review.query.filter_by(id=id).first()
-#         if review:
-#             return make_response(jsonify(review.to_dict()), 200)
-#         return {'error': '422 Unprocessable Entity'}, 422
+class ReviewById(Resource):
+    def get(self, id):
+        review = Review.query.filter_by(id=id).first()
+        if review:
+            return make_response(review.to_dict(), 200)
+        return {'error': '422 Unprocessable Entity'}, 422
     
-# class SortReviewsByRating(Resource):
-#     def get(self):
-#         reviews = Review.query.order_by(Review.rating.desc()).all() # no need to import desc
-#         return [review.to_dict(only=('id', 'content', 'rating', 'pro.name', 'pro.id', 'user.username',)) for review in reviews], 200
+class SortReviewsByRating(Resource):
+    def get(self):
+        reviews = Review.query.order_by(Review.rating.desc()).all() # no need to import desc
+        return [review.to_dict(only=('id', 'content', 'rating', 'property.title', 'property.id', 'guest.name',)) for review in reviews], 200
     
-# class ReviewsByProId(Resource):
-#     def get(self, pro_id):
-#         pro = Pro.query.filter_by(id=pro_id).first()
-#         return [review.to_dict(only=('id', 'content', 'rating', 'pro.name', 'pro.id', 'user.username',)) for review in pro.reviews], 200
+class ReviewsByPropertyId(Resource):
+    def get(self, property_id):
+        property = Property.query.filter_by(id=property_id).first()
+        return [review.to_dict(only=('id', 'content', 'rating', 'property.title', 'property.id', 'guest.name',)) for review in property.reviews], 200
     
-# class ReviewsByUser(Resource):
-#     def get(self, username):
-#         user = User.query.filter_by(username=username).first()
-#         return [review.to_dict() for review in user.reviews]
+class ReviewsByGuest(Resource):
+    def get(self, name):
+        guest = Guest.query.filter_by(name=name).first()
+        return [review.to_dict() for review in guest.reviews]
     
-# class ReviewsByContent(Resource):
-#     def get(self, content):
-#         # all_reviews = Review.query.all()
-#         # matching_reviews = [review.to_dict() for review in all_reviews if any(word in review.content.lower() for word in content.lower().split())]
-#         # return matching_reviews, 200
-#         reviews = Review.query.all()
-#         return [review.to_dict() for review in reviews if content.lower() in review.content.lower()], 200
+class ReviewsByContent(Resource):
+    def get(self, content):
+        # all_reviews = Review.query.all()
+        # matching_reviews = [review.to_dict() for review in all_reviews if any(word in review.content.lower() for word in content.lower().split())]
+        # return matching_reviews, 200
+        reviews = Review.query.all()
+        return [review.to_dict() for review in reviews if content.lower() in review.content.lower()], 200
 
 class Bookings(Resource):
     def get(self):       
@@ -237,21 +249,18 @@ api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(Properties, '/properties', endpoint='properties')
 api.add_resource(PropertyById, '/properties/<int:id>', endpoint='properties/id')
-# api.add_resource(ProByName, '/pros/<string:name>', endpoint='pros/name')
-# api.add_resource(ProsByService, '/pros/<string:service>', endpoint='pros/service')
-# api.add_resource(ProsByAverageRating, '/pros/average_rating/<int:average_rating>', endpoint='pros/average_rating/average_rating')
-# api.add_resource(SortProsByAverageRating, '/pros/by_average_rating', endpoint='pros/by_average_rating')
-# api.add_resource(BestPro, '/pros/best_pro', endpoint='pros/best_pro')
-# api.add_resource(ProsByReviewRating, '/pros/pros_by_review_rating/<int:rating>', endpoint='pros/pros_by_review_rating/rating')
-# api.add_resource(SortProsByNumberOfReviews, '/pros/pros_by_number_of_reviews', endpoint='pros/pros_by_number_of_reviews')
-# api.add_resource(FilterProsByNumberOfReviews, '/pro_reviews/<int:n>', endpoint='pro_reviews/n')
-# api.add_resource(ProsReviewedByUser, '/pros/pros_by_user/<string:username>', endpoint='pros/pros_by_user/username')
+api.add_resource(PropertyByTitle, '/properties/<string:title>', endpoint='properties/title')
+api.add_resource(PropertiesByLocation, '/properties/<string:location>', endpoint='properties/location')
+api.add_resource(SortPropertiesByPrice, '/properties/by_price', endpoint='properties/by_price')
+api.add_resource(MostExpensiveProperty, '/properties/most_expensive', endpoint='properties/most_expensive')
+api.add_resource(SortPropertiesByNumberOfReviews, '/properties/properties_by_number_of_reviews', endpoint='properties/properties_by_number_of_reviews')
+api.add_resource(FilterPropertiesByNumberOfReviews, '/property_reviews/<int:n>', endpoint='property_reviews/n')
 api.add_resource(Reviews, '/reviews', endpoint='reviews')
-# api.add_resource(ReviewById, '/reviews/<int:id>', endpoint='reviews/id')
-# api.add_resource(SortReviewsByRating, '/reviews/by_rating', endpoint='reviews/by_rating')
-# api.add_resource(ReviewsByProId, '/reviews/reviews_by_pro/<int:pro_id>', endpoint='reviews/reviews_by_pro/pro_id')
-# api.add_resource(ReviewsByUser, '/reviews/reviews_by_user/<string:username>', endpoint='reviews/reviews_by_user/username')
-# api.add_resource(ReviewsByContent, '/reviews/search_by_content/<string:content>', endpoint='reviews/search_by_content/content')
+api.add_resource(ReviewById, '/reviews/<int:id>', endpoint='reviews/id')
+api.add_resource(SortReviewsByRating, '/reviews/by_rating', endpoint='reviews/by_rating')
+api.add_resource(ReviewsByPropertyId, '/reviews/reviews_by_property/<int:property_id>', endpoint='reviews/reviews_by_property/property_id')
+api.add_resource(ReviewsByGuest, '/reviews/reviews_by_guest/<string:name>', endpoint='reviews/reviews_by_guest/name')
+api.add_resource(ReviewsByContent, '/reviews/search_by_content/<string:content>', endpoint='reviews/search_by_content/content')
 api.add_resource(Bookings, '/bookings', endpoint='bookings')
 api.add_resource(BookingById, '/bookings/<int:id>', endpoint='bookings/id')
 api.add_resource(Guests, '/guests', endpoint='guests') 
