@@ -65,7 +65,7 @@ Users - displays a list with all users.
 
 ## Check my latest blog post! 
 
-<!-- [An outline for planning the creation of a full stack application with a React frontend and a Python backend](https://medium.com/@anna-cole/an-outline-for-planning-the-creation-of-a-full-stack-application-with-a-react-frontend-and-a-python-57b47d46165a) -->
+<!-- [A beginner’s guide on how to implement context in a React application, for better state management.](https://medium.com/@anna-cole/a-beginners-guide-on-how-to-implement-context-in-a-react-application-for-better-state-management-06e52897715d) -->
 
 ## Contributing
 We welcome any and all contributions! Here are some ways you can get started:
