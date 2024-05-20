@@ -40,10 +40,12 @@ class Login(Resource):
         name = request.get_json()['name']
         password = request.get_json()['password']
         guest = Guest.query.filter(Guest.name == name).first()
-        if guest.authenticate(password):           
-            session['guest_id'] = guest.id
-            return guest.to_dict(), 200       
-        return {'error': 'Error 401: Unauthorized (invalid password)'}, 401
+        if guest:
+            if guest.authenticate(password):       
+                session['guest_id'] = guest.id
+                return guest.to_dict(), 200   
+            return {'error': 'Error 401: Unauthorized (invalid password)'}, 401    
+        return {'error': 'Error 401: Unauthorized (Please sign up)'}, 401
     
 class Logout(Resource):
     def delete(self):
