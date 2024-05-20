@@ -1,6 +1,6 @@
 # Mybnb
 
-Mybnb is an American website operating an online marketplace for home stays. Users can search for properties, see and create property reviews, create and manage bookings.
+Mybnb is an American website operating an online marketplace for home stays. Users can search for properties, see and create property reviews, create and manage bookings. The app also features an integrated Google Map API.
 
 We hope you enjoy and we look forward to your contributions!
 
@@ -12,13 +12,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Navigation
 
-After sign up or log in, the user will land on the home page, where they can navigate to the following routes:
+From the home page, the user can sign up, if they don't have an account or log in, if they have one. The sign up and log in features have error validations and password authentication. After a valid authentication, the user can navigate to the following routes:
 
-- Rent a property: here the user can see a list of the available properties. The user can search by location and other key words. A link below each photo will redirect the user to a page showing the property's details and reviews. In this page, the user can add a review for the property and also see a form to book it. 
+- Properties: here the user can see a list of the available properties. They can search by location or title, with lower or upper case. Each property shows its location, average rating, price and a link that redirects the user to a page showing more details about the property. 
 
-- Manage bookings: here the user can manage their bookings, view, edit and delete a booking. 
+- After clicking in this link, the user can see more details about the property, like an interactive Google Map showing where the property is located. The user can see a list of reviews, add a review and also book the property. 
 
-- Logout: when the user finishes, he can click this button to log out and terminate the session.
+- Your trips: here the user can view and manage their bookings, like editing or deleting a booking. 
+
+- Home: the user can click Home and be redirected to the home page.
+
+- Logout: the user can click this button to log out and terminate the session.
 
 ## Installing and running the server
 
@@ -47,13 +51,13 @@ Login - allows users to log in using their name and password.
 
 Logout - allows users to log out from the session.
 
-Properties - displays a list with all available properties.
+Properties - displays a list with all properties and also adds a property to the database.
 
-PropertyByID - displays a selected property, its details and reviews.
+PropertyByID - displays a selected property, its details and reviews. Also edits and deletes a property.
 
-Bookings - displays a list with the user's bookings and also adds a booking to the database.
+Bookings - displays a list with all bookings and also adds a booking to the database.
 
-BookingByID - displays a selected booking and its details.
+BookingByID - displays a selected booking and its details. Also has methods to edit and delete a booking.
 
 Reviews - displays a list with all reviews and also adds a review to the database.
 
@@ -61,7 +65,7 @@ Users - displays a list with all users.
 
  ## Video demo of the app
 
-<!-- [Video showing features](https://www.youtube.com/watch?v=eIfposqKA_s) -->
+<!-- [Video showing features of the app](https://www.youtube.com/watch?v=8dU2juMpmVg) -->
 
 ## Check my latest blog post! 
 
