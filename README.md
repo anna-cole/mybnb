@@ -39,7 +39,7 @@ To install and run the server, ensure that you have Python 3 and pip installed i
 1. Install the dependencies for the frontend client by running npm install --prefix client in your terminal, in the project's root directory.
 2. Then, run the app in the development mode with the command npm start --prefix client. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## App functionalities
+## App classes and main views.
 
 The classes and views in app.py allow users to perform basic CRUD operations, like: 
 
