@@ -65,11 +65,11 @@ Users - displays a list with all users.
 
  ## Video demo of the app
 
-<!-- [Video showing features of the app](https://www.youtube.com/watch?v=8dU2juMpmVg) -->
+[Video showing features of the app](https://www.youtube.com/watch?v=8dU2juMpmVg)
 
 ## Check my latest blog post! 
 
-<!-- [A beginner’s guide on how to implement context in a React application, for better state management.](https://medium.com/@anna-cole/a-beginners-guide-on-how-to-implement-context-in-a-react-application-for-better-state-management-06e52897715d) -->
+[A beginner’s guide on how to implement context in a React application, for better state management.](https://medium.com/@anna-cole/a-beginners-guide-on-how-to-implement-context-in-a-react-application-for-better-state-management-06e52897715d)
 
 ## Contributing
 We welcome any and all contributions! Here are some ways you can get started:
