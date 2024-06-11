@@ -1,6 +1,6 @@
 # Mybnb
 
-Mybnb is an American website operating an online marketplace for home stays. Users can search for properties, see and create property reviews, create and manage bookings. The app also features an integrated Google Map API.
+Mybnb is a web application operating an online marketplace for home stays, where users can search for properties, create reviews and manage bookings. It also features an integrated Google Maps API.
 
 We hope you enjoy and we look forward to your contributions!
 
