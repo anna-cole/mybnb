@@ -6,7 +6,7 @@ We hope you enjoy and we look forward to your contributions!
 
 ## Techinical description
 
-This app uses Flask to build an API backend, Flask-RESTful for its routes and Flask-SQLAlchemy, Flask-Migrate, and SQLAlchemy-Serializer for its models and database. It has database constraints and Formik validations to validate data and protect the database. SQLAlchemy is used as the ORM – Object Relational Mapping technology to manipulate data to and from the database. 
+This app uses Python and Flask to build an API backend, Flask-RESTful for its routes and Flask-SQLAlchemy, Flask-Migrate, and SQLAlchemy-Serializer for its models and database. It has database constraints and Formik validations to validate data and protect the database. SQLAlchemy is used as the ORM – Object Relational Mapping technology to manipulate data to and from the database. 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
