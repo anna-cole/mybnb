@@ -88,6 +88,8 @@ For any questions or support, please email acrrj123@gmail.com
 
 ## Resources
 
+- [How to create an App with a React frontend and Python backend](https://medium.com/@anna-cole/an-outline-for-planning-the-creation-of-a-full-stack-application-with-a-react-frontend-and-a-python-57b47d46165a)
+
 - [Create React App](https://github.com/facebook/create-react-app)
 
 
