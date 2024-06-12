@@ -65,7 +65,9 @@ Users - displays a list with all users.
 
  ## Video demo of the app
 
-[Video showing features of the app](https://www.youtube.com/watch?v=8dU2juMpmVg)
+[Video showing features of the app](https://www.loom.com/share/dee7d60a507445f9b7c94ae0e2ca706d?sid=0080d0f6-abc5-40b0-86ce-47fd7a5dc512)
+
+[https://www.loom.com/embed/dee7d60a507445f9b7c94ae0e2ca706d?sid=43a3a399-655e-4708-ab56-7c1ce860c5a9]
 
 ## Check my latest blog post! 
 
