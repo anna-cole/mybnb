@@ -67,9 +67,7 @@ Users - displays a list with all users.
 
 [Video showing features of the app](https://www.loom.com/share/dee7d60a507445f9b7c94ae0e2ca706d?sid=0080d0f6-abc5-40b0-86ce-47fd7a5dc512)
 
-[https://www.loom.com/embed/dee7d60a507445f9b7c94ae0e2ca706d?sid=43a3a399-655e-4708-ab56-7c1ce860c5a9]
-
-## Check my latest blog post! 
+## Check my blog post about a technique used in this app 
 
 [A beginner’s guide on how to implement context in a React application, for better state management.](https://medium.com/@anna-cole/a-beginners-guide-on-how-to-implement-context-in-a-react-application-for-better-state-management-06e52897715d)
 
