@@ -1,5 +1,6 @@
 # Mybnb
 Mybnb is a web application operating an online marketplace for home stays, where users can search for properties, create reviews and manage bookings. It also features an integrated Google Maps API.
+
 We hope you enjoy and we look forward to your contributions!
 
 ## Techinical description
@@ -28,15 +29,25 @@ To install and run the server, ensure that you have Python 3 and pip installed i
 
 ## App classes and main views.
 The classes and views in app.py allow users to perform basic CRUD operations, like: 
+
 Signup - allows users to sign up by creating a user profile.
-CheckSession - allows users to stay connected after log in. 
+
+CheckSession - allows users to stay connected after log in.
+
 Login - allows users to log in using their name and password.
+
 Logout - allows users to log out from the session.
+
 Properties - displays a list with all properties and also adds a property to the database.
+
 PropertyByID - displays a selected property, its details and reviews. Also edits and deletes a property.
+
 Bookings - displays a list with all bookings and also adds a booking to the database.
+
 BookingByID - displays a selected booking and its details. Also has methods to edit and delete a booking.
+
 Reviews - displays a list with all reviews and also adds a review to the database.
+
 Users - displays a list with all users.
 
 ## Video demo of the app
