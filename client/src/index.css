@@ -10,12 +10,23 @@
   max-width: 1200px;
 }
 
+.home-container {
+  display: flex;
+  justify-content: space-between; /* Ensures spacing between the info and image */
+  align-items: center; /* Aligns the content vertically */
+  padding: 20px 40px; /* Padding for aesthetics */
+}
+
 .background-image {
-  border-radius: 30px; 
-  float: right;
-  position: absolute;
-  top: 70px; 
-  right: 140px
+  border-radius: 30px;
+  max-width: 50%; 
+  height: auto; /* Ensures the image scales properly */
+  object-fit: cover; /* Ensures the image covers its container without stretching */
+}
+
+.home-info {
+  flex: 1; /* Ensures the info takes up the remaining space */
+  padding-right: 20px; /* Spacing between the text and the image */
 }
 
 #header {
@@ -246,6 +257,34 @@ button:hover {
   position: relative;
   top: -10px;
 }
+
+@media screen and (max-width: 920px) {
+  .home-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .background-image {
+    width: 80%;
+    margin-right: 0;
+    margin-top: 20px;
+  }
+
+  .logo {
+    width: 20%;
+    height: 20%;
+    margin-right: 0;
+  }
+  
+  .home-info {
+    width: 100%;
+  }
+  
+
+
+}
+
 
 
 
