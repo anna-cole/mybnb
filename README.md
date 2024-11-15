@@ -1,5 +1,7 @@
-# Mybnb
-Mybnb is a web application operating an online marketplace for home stays, where users can search for properties, create reviews and manage bookings. It also features an integrated Google Maps API.
+# Mybnb - Home Rentals Marketplace
+A dynamic and user-friendly marketplace for home rentals, allowing users to easily search for properties, leave reviews, and manage their bookings. The platform offers a seamless experience for both renters and property owners, with intuitive search filters, a review system for properties, interactive map, user authentication, secure password encryption, and booking management features. Built with a focus on user engagement and efficiency, the app enables users to find their ideal home, share their experiences, and handle reservations effortlessly.
+
+React | Flask | Python | SQLAlchemy | Google Maps API | Auth | RESTful APIs
 
 We hope you enjoy and we look forward to your contributions!
 
