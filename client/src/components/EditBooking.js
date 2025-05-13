@@ -16,7 +16,7 @@ const EditBooking = ({ booking, handleUpdate }) => {
     validationSchema: formSchema,
     onSubmit: (values) => {
       // console.log("Booking before fetch:", values);
-      fetch(`/bookings/${booking.id}`, {
+      fetch(`${process.env.REACT_APP_API_URL}/bookings/${booking.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

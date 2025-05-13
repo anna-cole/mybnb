@@ -6,7 +6,7 @@ const BookingsProvider = ({ children }) => {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    fetch("/bookings")
+    fetch(`${process.env.REACT_APP_API_URL}/bookings`)
       .then(resp => resp.json())
       .then(bookings => setBookings(bookings))
   }, [])

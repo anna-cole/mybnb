@@ -20,7 +20,7 @@ const AddReview = ({ property, addReview }) => {
         property_id : property.id, 
       };
       // console.log("Review before fetch:", reviewData);
-      fetch("/reviews", {
+      fetch(`${process.env.REACT_APP_API_URL}/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
