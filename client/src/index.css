@@ -24,6 +24,14 @@
   object-fit: cover; /* Ensures the image covers its container without stretching */
 }
 
+.background-image-signup {
+  border-radius: 30px;
+  max-width: 50%; 
+  height: auto; /* Ensures the image scales properly */
+  object-fit: cover; /* Ensures the image covers its container without stretching */
+  margin-top: -70px;
+}
+
 .home-info {
   flex: 1; /* Ensures the info takes up the remaining space */
   padding-right: 20px; /* Spacing between the text and the image */

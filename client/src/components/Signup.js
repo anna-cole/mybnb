@@ -52,55 +52,57 @@ const Signup = () => {
 
   return (
     <div className="app">
-      <header>
-        <h2>Create your account</h2>
-        <img className="background-image" src="/camboinhas2.png" alt="camboinhas2" width="500" height="300"/>
-      </header>
-      <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
-        <label htmlFor="name">Name</label>
-        <br />
-        <input
-          input type="text"
-          className="field"
-          name="name"
-          onChange={formik.handleChange}
-          value={formik.values.name}
-        />
-        <p style={{ color: "red" }}> {formik.errors.name}</p>
-        <label htmlFor="email">Email Address</label>
-        <br />
-        <input
-          input type="email"
-          className="field"
-          name="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-        <p style={{ color: "red" }}> {formik.errors.email}</p>
-        <label htmlFor="password">Password</label>
-        <br />
-        <input
-          input type="password"
-          className="field"
-          name="password"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-        />
-        <p style={{ color: "red" }}> {formik.errors.password}</p>
-        <div className='password'>
-          <p>Your password must:</p>
-          <ul>
-            <li>be 4 to 15 characters long</li>
-            <li>not be commonly used or easily guessed</li>
-          </ul>
+      <div className='home-container'>
+        <div className='home-info'>
+          <h2>Create your account</h2>
+          <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
+            <label htmlFor="name">Name</label>
+            <br />
+            <input
+              input type="text"
+              className="field"
+              name="name"
+              onChange={formik.handleChange}
+              value={formik.values.name}
+            />
+            <p style={{ color: "red" }}> {formik.errors.name}</p>
+            <label htmlFor="email">Email Address</label>
+            <br />
+            <input
+              input type="email"
+              className="field"
+              name="email"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+            />
+            <p style={{ color: "red" }}> {formik.errors.email}</p>
+            <label htmlFor="password">Password</label>
+            <br />
+            <input
+              input type="password"
+              className="field"
+              name="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+            />
+            <p style={{ color: "red" }}> {formik.errors.password}</p>
+            <div className='password'>
+              <p>Your password must:</p>
+              <ul>
+                <li>be 4 to 15 characters long</li>
+                <li>not be commonly used or easily guessed</li>
+              </ul>
+            </div>
+            <button type="submit" className="submit-button">Create account</button>
+          </form>
+          <p> Already have an account? &nbsp;
+            <button className='default-button' onClick={() => navigate("/login")}>
+              Log In
+            </button>
+          </p>
         </div>
-        <button type="submit" className="submit-button">Create account</button>
-      </form>
-      <p> Already have an account? &nbsp;
-        <button className='default-button' onClick={() => navigate("/login")}>
-          Log In
-        </button>
-      </p>
+        <img className="background-image-signup" src="/camboinhas2.png" alt="camboinhas2" width="500" height="300"/>
+      </div>
     </div>
   )
 }
