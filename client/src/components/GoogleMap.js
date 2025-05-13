@@ -5,20 +5,14 @@ import {
   LoadScript
 } from '@react-google-maps/api';
 
-interface GoogleMapProps {
-  property: {
-    location: string;
-  };
-}
-
 const containerStyle = {
   width: '95%',
   height: '400px',
-  position: 'relative' as const
+  position: 'relative'
 };
 
-const GoogleMap: React.FC<GoogleMapProps> = ({ property }) => {
-  const [markerPosition, setMarkerPosition] = useState<{ lat: number; lng: number } | null>(null);
+const GoogleMap = ({ property }) => {
+  const [markerPosition, setMarkerPosition] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -52,7 +46,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ property }) => {
   return (
     <div>
       <h3>Where you'll be:</h3>
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY!}>
+      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
         <GoogleMapComponent
           mapContainerStyle={containerStyle}
           center={markerPosition}
