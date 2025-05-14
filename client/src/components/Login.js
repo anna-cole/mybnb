@@ -27,7 +27,7 @@ const Login = () => {
     },
     validationSchema: formSchema,
     onSubmit: (values) => {
-      fetch(`/login`, {
+      fetch(`${process.env.REACT_APP_API_BASE_URL}/login`, {
         method: "POST",
         headers: {
           "Accept": "application/json",

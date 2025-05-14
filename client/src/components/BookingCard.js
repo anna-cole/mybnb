@@ -7,7 +7,7 @@ const BookingCard = ({ booking }) => {
   const { deleteBooking, updateBooking } = useContext(BookingsContext);
 
   const handleDelete = () => {
-    fetch(`/bookings/${booking.id}`, {method: "DELETE"})
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/bookings/${booking.id}`, {method: "DELETE"})
     deleteBooking(booking.id)
   }
 

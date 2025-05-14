@@ -15,7 +15,7 @@ const App = () => {
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    fetch(`/properties`)
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/properties`)
       .then(resp => resp.json())
       .then(properties => setProperties(properties))
   }, [])

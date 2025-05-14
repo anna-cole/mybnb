@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const handleLogout = e => {
     e.preventDefault();
-    fetch(`/logout`, {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/logout`, {
       method: 'DELETE'
     })
     logout();
