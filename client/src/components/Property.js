@@ -38,18 +38,29 @@ const Property = () => {
   
   return (
     <div className="app">
-      <h3>{property.title}</h3>
-      <img className="background-image" src={image} alt={property.id} width="400" height="300" />
-      <ul>
-        <li>Average rating: {totalRating ? `${averageRating} ${stars}` : null}</li>
-        <li>Location: {property.location}</li>
-        <li><strong>${property.price}</strong> night</li>
-      </ul>
-      <Reviews reviews={reviews} />
-      <button className="submit-button" onClick={() => setOpenForm(!openForm)}>Add a review</button>
-      {openForm ? <AddReview property={property} addReview={addReview} /> : null}
-      <AddBooking property={property} />
-      <GoogleMap property={property}/>
+      <div className="home-container">
+        <div className="home-info">
+          <h3>{property.title}</h3>
+          {/* Mobile image below title */}
+          <div className="mobile-image-wrapper">
+            <img className="mobile-image" src={image} alt={property.id} width="400" height="300" />
+          </div>
+          <ul className='property-list'>
+            <li>Average rating: {totalRating ? `${averageRating} ${stars}` : null}</li>
+            <li>Location: {property.location}</li>
+            <li><strong>${property.price}</strong> night</li>
+          </ul>
+          <Reviews reviews={reviews} />
+          <button className="submit-button" onClick={() => setOpenForm(!openForm)}>Add a review</button>
+          {openForm ? <AddReview property={property} addReview={addReview} /> : null}
+          <AddBooking property={property} />
+          <GoogleMap property={property}/>
+        </div>
+        {/* Desktop image (right side) */}
+        <div className="image-wrapper">
+          <img className="background-image" src={image} alt={property.id} width="400" height="300" />
+        </div>
+      </div>
     </div>
   )
 }

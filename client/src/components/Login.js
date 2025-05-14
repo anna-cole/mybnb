@@ -57,7 +57,7 @@ const Login = () => {
             <label htmlFor="email">Email</label>
             <br />
             <input
-              input type="email"
+              type="email"
               className="field"
               name="email"
               onChange={formik.handleChange}
@@ -67,7 +67,7 @@ const Login = () => {
             <label htmlFor="password">Password</label>
             <br />
             <input
-              input type="password"
+              type="password"
               className="field"
               name="password"
               onChange={formik.handleChange}
@@ -82,7 +82,9 @@ const Login = () => {
             </button>
           </p>
         </div>
-        <img className="background-image" src="/itaqua.png" alt="itaqua" width="500" height="300"/>
+        <div className='image-wrapper'>
+          <img className="background-image" src="/itaqua.png" alt="itaqua" width="500" height="300"/>
+        </div>
       </div>
     </div>
   )

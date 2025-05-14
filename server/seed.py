@@ -56,6 +56,18 @@ if __name__ == '__main__':
             "./tree_house4.png",
             "./tree_house5.png",
         ]
+        titles = [
+            "Beautiful Beach House",
+            "Cozy Cabin in the Woods",
+            "Modern Apartment in the City",
+            "Charming Cottage by the Lake",
+            "Luxurious Villa with Pool",
+            "Stylish Loft with Rooftop Terrace",
+            "Spacious Family Home",
+            "Rustic Farmhouse Retreat",
+            "Trendy Studio in Downtown",
+            "Elegant Mansion with Ocean View"
+        ]
         locations = [
             "Los Angeles", 
             "Rio de Janeiro", 
@@ -73,9 +85,10 @@ if __name__ == '__main__':
         for i in range(10):
 
             property = Property(
-                title=fake.paragraph(nb_sentences=1),
-                # location=fake['en-US'].city(),
+                title=rc(titles),
+                # title=fake.paragraph(nb_sentences=1),
                 location=rc(locations),
+                # location=fake['en-US'].city(),
                 price=fake.pydecimal(left_digits=2, right_digits=2, positive=True),
                 image_url=rc(images),
                 # image_url=fake.image_url(width=50, height=50),

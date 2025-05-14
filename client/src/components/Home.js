@@ -13,7 +13,9 @@ const Home = () => {
             <button type="submit" className="submit-button">Find a property</button>
           </Link>
         </div>
-        <img className="background-image" src="/camboinhas.png" alt="camboinhas" width="500" height="300"/>
+        <div className="image-wrapper">
+          <img className="background-image" src="/camboinhas.png" alt="camboinhas" width="500" height="300"/>
+        </div>
       </div>
     </div>
   )

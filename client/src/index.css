@@ -13,23 +13,27 @@
 .home-container {
   display: flex;
   justify-content: space-between; /* Ensures spacing between the info and image */
-  align-items: center; /* Aligns the content vertically */
+  align-items: flex-start; /* Align items at the top */
   padding: 20px 40px; /* Padding for aesthetics */
+  flex-wrap: wrap; /* Helps on smaller screens */
+}
+
+.image-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  max-width: 50%;
 }
 
 .background-image {
   border-radius: 30px;
-  max-width: 50%; 
+  width: 100%; 
   height: auto; /* Ensures the image scales properly */
   object-fit: cover; /* Ensures the image covers its container without stretching */
 }
 
-.background-image-signup {
-  border-radius: 30px;
-  max-width: 50%; 
-  height: auto; /* Ensures the image scales properly */
-  object-fit: cover; /* Ensures the image covers its container without stretching */
-  margin-top: -70px;
+.mobile-image-wrapper {
+  display: none;
 }
 
 .home-info {
@@ -187,10 +191,61 @@ li h1 {
   margin-top: 0.5rem;
 }
 
+.reviews-list {
+  word-wrap: break-word;
+  max-width: 600px;
+}
+
+.booking-box {
+  width: 200px;
+  padding: 10px 5px;
+  box-shadow: rgba(0, 0, 0, 0.30) 0px 6px 16px;
+  border-radius: 15px;
+}
+
+.label-booking {
+  display: block;
+  margin-top: 10px;
+}
+
+input[type="date"],
+button {
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.container {
+  position: relative;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+button:hover {
+  background-color: #bbbec1;
+} 
+
 @media (max-width: 768px) {
   .home-container {
     flex-direction: column;
     align-items: center;
+  }
+
+  .image-wrapper {
+    display: none; /* hide desktop image */
+  }
+
+  .mobile-image-wrapper {
+    display: flex; /* show image below title */
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .mobile-image {
+    border-radius: 30px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: cover;
   }
 
   .home-info {
@@ -205,10 +260,10 @@ li h1 {
     transform: none;
   }
 
-  .background-image-signup {
-    max-width: 90%;
+  .image-wrapper {
+    max-width: 100%;
+    justify-content: center;
     margin-top: 20px;
-    transform: none;
   }
 
   .field {
@@ -243,6 +298,27 @@ li h1 {
   .card {
     width: 80%;
   }
+
+  .reviews-list {
+    padding-left: 1.5rem;
+    text-align: justify;
+    max-width: 300px;
+    margin: 0 auto;
+    padding-bottom: 1.5rem;
+  }
+
+  .property-list {
+    padding-left: 1.5rem;
+    text-align: justify;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .booking-box {
+    text-align: center;
+    max-width: 300px;
+    margin: 0 auto;
+  }
 }
 
 
@@ -258,37 +334,6 @@ li h1 {
     width: calc(20% - 2rem);
   }
 }
-
-.reviews-list {
-  word-wrap: break-word;
-  max-width: 600px;
-}
-
-.container {
-  position: relative;
-}
-
-.booking-box {
-  width: 200px;
-  padding: 10px 5px 5px 20px;
-  box-shadow: rgba(0, 0, 0, 0.30) 0px 6px 16px;
-  border-radius: 15px; 
-}
-
-.label-booking {
-  display: block;
-  margin-top: 10px;
-}
-
-input[type="date"],
-button {
-  width: 80%;
-  margin-bottom: 10px;
-}
-
-button:hover {
-  background-color: #bbbec1;
-} 
 
 .default-button { 
   cursor: pointer;
