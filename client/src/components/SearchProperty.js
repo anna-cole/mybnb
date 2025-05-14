@@ -4,6 +4,7 @@ const SearchProperty = ({ search, onChangeText }) => {
       <div className="searchbar">
         <label htmlFor="search">RENT A PROPERTY</label>
         <input
+          className="field"
           type="text"
           id="search"
           placeholder="Search by title or location."

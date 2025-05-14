@@ -14,13 +14,15 @@ const Properties = ({ properties }) => {
 
   return (
     <div className="app">
-      <p>{propertiesToDisplay.length} properties based on your criteria.<br />
-      Narrow down your search by title or location.</p>
-      <SearchProperty onChangeText={e => setSearch(e.target.value)} search={search} />
-      <ul className="cards">
-        {propertiesToDisplay.map(property => 
-        <PropertyCard key={property.id} property={property} />)}
-      </ul>
+      <div className="properties-container">
+        <p>{propertiesToDisplay.length} properties based on your criteria.<br />
+        Narrow down your search by title or location.</p>
+        <SearchProperty onChangeText={e => setSearch(e.target.value)} search={search} />
+        <ul className="cards">
+          {propertiesToDisplay.map(property => 
+          <PropertyCard key={property.id} property={property} />)}
+        </ul>
+      </div>
     </div>
   )
 }

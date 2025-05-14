@@ -8,7 +8,7 @@ const UserProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/check_session`)
+    fetch(`/check_session`)
     .then(r => {
       if (r.ok) {
         r.json().then(guest => login(guest))
