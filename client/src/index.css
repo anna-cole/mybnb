@@ -345,6 +345,14 @@ button:hover {
     padding-bottom: 1.5rem;
   }
 
+  .bookings-list {
+    padding-left: 1.5rem;
+    text-align: justify;
+    max-width: 280px;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+  }
+
   .property-list {
     padding-left: 1.5rem;
     text-align: justify;

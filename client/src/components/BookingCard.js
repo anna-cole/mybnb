@@ -17,17 +17,17 @@ const BookingCard = ({ booking }) => {
   }
   
   return (
-    <ul>
-    <li>
-      Check in: {booking.check_in}<br/>
-      Check out: {booking.check_out}<br/>
-      Accomodation: {booking.property.title}<br/>
-      Location: {booking.property.location}<br/>
-      <button className='booking-button' onClick={handleDelete}>Delete</button>&nbsp;
-      <button className='booking-button' onClick={() => setIsEditing(!isEditing)}>Edit</button>
-      {isEditing ? (<EditBooking booking={booking} handleUpdate={handleUpdate} />) : null}
-    </li>
-  </ul>
+    <ul className="bookings-list">
+      <li>
+        Check in: {booking.check_in}<br/>
+        Check out: {booking.check_out}<br/>
+        Accomodation: {booking.property.title}<br/>
+        Location: {booking.property.location}<br/>
+        <button className='booking-button' onClick={handleDelete}>Delete</button>&nbsp;
+        <button className='booking-button' onClick={() => setIsEditing(!isEditing)}>Edit</button>
+        {isEditing ? (<EditBooking booking={booking} handleUpdate={handleUpdate} />) : null}
+      </li>
+    </ul>
   )
 }
 

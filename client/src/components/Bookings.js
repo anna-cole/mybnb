@@ -13,8 +13,12 @@ const Bookings = () => {
 
   return (
     <div className="app">
-      <h2 className="user-bookings">{currentUser.name}'s trips:</h2>
-      {guestBookings.map(booking => <BookingCard key={booking.id} booking={booking} />)}
+      <div className='home-container'>
+        <div className='home-info'>
+          <h2 className="user-bookings">{currentUser.name}'s trips:</h2>
+          {guestBookings.map(booking => <BookingCard key={booking.id} booking={booking} />)}
+        </div>
+      </div>
     </div>
   )
 }
