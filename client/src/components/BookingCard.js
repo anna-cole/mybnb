@@ -7,7 +7,7 @@ const BookingCard = ({ booking }) => {
   const { deleteBooking, updateBooking } = useContext(BookingsContext);
 
   const handleDelete = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/bookings/${booking.id}`, {method: "DELETE"})
+    fetch(`/bookings/${booking.id}`, {method: "DELETE"})
     deleteBooking(booking.id)
   }
 
@@ -23,8 +23,8 @@ const BookingCard = ({ booking }) => {
       Check out: {booking.check_out}<br/>
       Accomodation: {booking.property.title}<br/>
       Location: {booking.property.location}<br/>
-      <button className='default-button' onClick={handleDelete}>Delete</button>&nbsp;
-      <button className='default-button' onClick={() => setIsEditing(!isEditing)}>Edit</button>
+      <button className='booking-button' onClick={handleDelete}>Delete</button>&nbsp;
+      <button className='booking-button' onClick={() => setIsEditing(!isEditing)}>Edit</button>
       {isEditing ? (<EditBooking booking={booking} handleUpdate={handleUpdate} />) : null}
     </li>
   </ul>

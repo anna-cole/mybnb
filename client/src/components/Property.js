@@ -57,7 +57,7 @@ const Property = () => {
           <GoogleMap property={property}/>
         </div>
         {/* Desktop image (right side) */}
-        <div className="image-wrapper">
+        <div className="image-wrapper-property">
           <img className="background-image" src={image} alt={property.id} width="400" height="300" />
         </div>
       </div>
