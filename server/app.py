@@ -37,9 +37,9 @@ class CheckSession(Resource):
     
 class Login(Resource):
     def post(self):
-        name = request.get_json()['name']
+        email = request.get_json()['email']
         password = request.get_json()['password']
-        guest = Guest.query.filter(Guest.name == name).first()
+        guest = Guest.query.filter(Guest.email == email).first()
         if guest:
             if guest.authenticate(password):       
                 session['guest_id'] = guest.id

@@ -29,7 +29,7 @@ const Signup = () => {
     },
     validationSchema: formSchema,
     onSubmit: (values) => {
-      fetch(`${process.env.REACT_APP_API_URL}/signup`, {
+      fetch(`/signup`, {
         method: "POST",
         headers: {
           "Accept": "application/json",

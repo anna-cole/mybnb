@@ -211,10 +211,6 @@ li h1 {
     transform: none;
   }
 
-  ul {
-    text-align: start;
-  }
-
   .field {
     width:250px;
   }
@@ -227,9 +223,21 @@ li h1 {
     text-align: center;
   }
 
+  .password {
+    text-align: center;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .password ul {
+    padding-left: 1.5rem;
+    text-align: justify;
+  }
+
   .cards {
     flex-direction: column;
     align-items: center;
+    text-align: start;
   }
 
   .card {

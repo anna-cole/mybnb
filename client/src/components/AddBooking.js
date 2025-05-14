@@ -25,7 +25,7 @@ const AddBooking = ({ property }) => {
         property_id : property.id, 
       };
       // console.log("Booking before fetch:", bookingData);
-      fetch(`${process.env.REACT_APP_API_URL}/bookings`, {
+      fetch(`/bookings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

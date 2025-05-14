@@ -13,7 +13,7 @@ const Property = () => {
   const property_id = params.id
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/properties/${property_id}`)
+    fetch(`/properties/${property_id}`)
     .then(r => {
       if (r.ok) {
         r.json().then(property => {

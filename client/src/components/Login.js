@@ -16,18 +16,18 @@ const Login = () => {
   const navigate = useNavigate();
 
   const formSchema = yup.object().shape({
-    name: yup.string().required("Must enter a name").matches(/^[a-zA-Z ]*$/, 'Must enter only letters').min(4).max(15),
+    email: yup.string().required("Must enter email").email("Invalid email"),
     password: yup.string().required("Must enter a password").min(4).max(15)
   })
 
   const formik = useFormik({
     initialValues: {
-      "name": "",
+      "email": "",
       "password": ""
     },
     validationSchema: formSchema,
     onSubmit: (values) => {
-      fetch(`${process.env.REACT_APP_API_URL}/login`, {
+      fetch(`/login`, {
         method: "POST",
         headers: {
           "Accept": "application/json",
@@ -54,16 +54,16 @@ const Login = () => {
         <div className='home-info'>
           <h2>Please enter your login details</h2>
           <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="email">Email</label>
             <br />
             <input
-              input type="text"
+              input type="email"
               className="field"
-              name="name"
+              name="email"
               onChange={formik.handleChange}
-              value={formik.values.name}
+              value={formik.values.email}
             />
-            <p style={{ color: "red" }}> {formik.errors.name}</p>
+            <p style={{ color: "red" }}> {formik.errors.email}</p>
             <label htmlFor="password">Password</label>
             <br />
             <input
