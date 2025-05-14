@@ -37,14 +37,14 @@
   padding-right: 20px; /* Spacing between the text and the image */
 }
 
-#header {
+/* #header {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.5em;
   font-weight: 900;
   padding: 1rem;
   margin: 2rem 2rem 0 -1rem;
   color:rgb(6, 145, 188);
-}
+} */
 
 .logo {
   position: relative;
@@ -140,7 +140,6 @@ input {
 
 .field {
   padding: 0.50rem;
-  border: none;
   font-family: inherit;
   font-size: 1.2em;
   border: 2px solid lightgray;
@@ -157,7 +156,7 @@ p {
   font-size: 1rem;
   letter-spacing: -.025rem;
   line-height: 25px;
-  max-width: 500px;
+  /* max-width: 500px; */
 }
 
 li h1 {
@@ -191,6 +190,42 @@ li h1 {
 .card button {
   margin-top: 0.5rem;
 }
+
+@media (max-width: 768px) {
+  .home-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .home-info {
+    padding-right: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .background-image {
+    max-width: 90%;
+    margin-top: 20px;
+    transform: none;
+  }
+
+  .background-image-signup {
+    max-width: 90%;
+    margin-top: 20px;
+    transform: none;
+  }
+
+  ul {
+    text-align: start;
+    margin-left: 4rem;
+  }
+
+  .field {
+    width:250px;
+  }
+}
+
+
 
 @media (min-width: 768px) {
   .cards {
@@ -266,32 +301,7 @@ button:hover {
   top: -10px;
 }
 
-@media screen and (max-width: 920px) {
-  .home-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .background-image {
-    width: 80%;
-    margin-right: 0;
-    margin-top: 20px;
-  }
 
-  .logo {
-    width: 20%;
-    height: 20%;
-    margin-right: 0;
-  }
-  
-  .home-info {
-    width: 100%;
-  }
-  
-
-
-}
 
 
 

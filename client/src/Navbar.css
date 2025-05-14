@@ -16,6 +16,13 @@ a.active {
   color: white;
 }
 
+@media (max-width: 768px) {
+  .navbar {
+    text-align: center; /* Center the inline-block children */
+  }
+}
+
+
 
 
 
