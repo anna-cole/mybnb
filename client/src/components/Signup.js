@@ -29,6 +29,8 @@ const Signup = () => {
     },
     validationSchema: formSchema,
     onSubmit: (values) => {
+      console.log('API base URL:', process.env.REACT_APP_API_BASE_URL);
+
       fetch(`${process.env.REACT_APP_API_BASE_URL}/signup`, {
         method: "POST",
         headers: {
