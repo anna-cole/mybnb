@@ -14,27 +14,18 @@ def index():
 
 class Signup(Resource):
     def post(self):
+        name = request.get_json().get('name')
+        email = request.get_json().get('email') 
+        password = request.get_json().get('password')
         try:
-            data = request.get_json()
-            name = data.get('name')
-            email = data.get('email')
-            password = data.get('password')
-
             guest = Guest(name=name, email=email)
             guest.password_hash = password
             db.session.add(guest)
             db.session.commit()
-
             session['guest_id'] = guest.id
-            return guest.to_dict(), 201
-
-        except IntegrityError:
-            db.session.rollback()
-            return {'error': 'Error 422: Unprocessable Entity (name or email already exists)'}, 422
-
-        except Exception as e:
-            db.session.rollback()
-            return {'error': f'Server error: {str(e)}'}, 500
+            return guest.to_dict(), 201 
+        except IntegrityError:   
+            return {'error': 'Error 422: Unprocessable Entity (name already exists)'}, 422
 
 class CheckSession(Resource):
     def get(self):
