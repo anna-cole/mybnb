@@ -27,6 +27,12 @@ db.init_app(app)
 bcrypt = Bcrypt(app)
 api = Api(app)
 
+app.config.update(
+    SESSION_COOKIE_SAMESITE='None',
+    SESSION_COOKIE_SECURE=True  # Required for SameSite=None to work
+)
+
+
 CORS(app, supports_credentials=True, origins=[
     'http://localhost:3000',
     'https://mybnb-frontend.onrender.com'
