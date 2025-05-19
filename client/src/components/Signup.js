@@ -65,6 +65,7 @@ const Signup = () => {
               name="name"
               onChange={formik.handleChange}
               value={formik.values.name}
+              autocomplete="name"
             />
             <p style={{ color: "red" }}> {formik.errors.name}</p>
             <label htmlFor="email">Email Address</label>
@@ -75,6 +76,7 @@ const Signup = () => {
               name="email"
               onChange={formik.handleChange}
               value={formik.values.email}
+              autocomplete="email"
             />
             <p style={{ color: "red" }}> {formik.errors.email}</p>
             <label htmlFor="password">Password</label>
@@ -85,6 +87,7 @@ const Signup = () => {
               name="password"
               onChange={formik.handleChange}
               value={formik.values.password}
+              autocomplete="current-password"
             />
             <p style={{ color: "red" }}> {formik.errors.password}</p>
             <div className='password'>
