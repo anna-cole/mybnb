@@ -15,10 +15,12 @@ const App = () => {
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/properties`)
-      .then(resp => resp.json())
-      .then(properties => setProperties(properties))
-  }, [])
+  fetch(`${process.env.REACT_APP_API_BASE_URL}/properties`, {
+    credentials: 'include',  // Required to send cookies!
+  })
+    .then(resp => resp.json())
+    .then(properties => setProperties(properties));
+  }, []);
 
   return (
     <Router>

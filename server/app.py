@@ -38,22 +38,30 @@ class CheckSession(Resource):
             return {'error': 'Guest not found'}, 404
 
         return guest.to_dict(), 200
- 
+
 class Login(Resource):
     def post(self):
-        email = request.get_json()['email']
-        password = request.get_json()['password']
-        guest = Guest.query.filter(Guest.email == email).first()
-        if guest:
-            if guest.authenticate(password):       
-                session['guest_id'] = guest.id
-                return guest.to_dict(), 200   
-            return {'error': 'Error 401: Unauthorized (invalid password)'}, 401    
-        return {'error': 'Error 401: Unauthorized (Please sign up)'}, 401
-    
+        data = request.get_json()
+
+        if not data or 'email' not in data or 'password' not in data:
+            return {'error': 'Error 400: Bad Request (email and password required)'}, 400
+
+        email = data.get('email')
+        password = data.get('password')
+
+        guest = Guest.query.filter_by(email=email).first()
+
+        if guest and guest.authenticate(password):
+            session['guest_id'] = guest.id
+            
+            response = make_response(jsonify(guest.to_dict()), 200)
+            return response
+
+        return {'error': 'Error 401: Unauthorized (Invalid credentials)'}, 401
+
 class Logout(Resource):
     def delete(self):
-        if session['guest_id']:
+        if session.get('guest_id'):
             del session['guest_id']
             return {'message': 'You are not logged in.'}, 200
         return {'error': '401 Unauthorized'}, 401

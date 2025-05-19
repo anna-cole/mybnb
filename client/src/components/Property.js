@@ -13,16 +13,18 @@ const Property = () => {
   const property_id = params.id
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/properties/${property_id}`)
+  fetch(`${process.env.REACT_APP_API_BASE_URL}/properties/${property_id}`, {
+    credentials: 'include', // Send cookies with request
+  })
     .then(r => {
       if (r.ok) {
         r.json().then(property => {
-          setProperty(property)
-          setReviews(property.reviews)
-        })
+          setProperty(property);
+          setReviews(property.reviews);
+        });
       }
-    })
-  }, [property_id])
+    });
+  }, [property_id]);
 
   const addReview = (newReview) => {
     setOpenForm(false)

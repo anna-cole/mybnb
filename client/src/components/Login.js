@@ -29,6 +29,7 @@ const Login = () => {
     onSubmit: (values) => {
       fetch(`${process.env.REACT_APP_API_BASE_URL}/login`, {
         method: "POST",
+        credentials: 'include', // Support session cookies
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json"

@@ -27,11 +27,16 @@ db.init_app(app)
 bcrypt = Bcrypt(app)
 api = Api(app)
 
-app.config.update(
-    SESSION_COOKIE_SAMESITE='None',
-    SESSION_COOKIE_SECURE=True  # Required for SameSite=None to work
-)
-
+if os.getenv('FLASK_ENV') == 'development':
+    app.config.update(
+        SESSION_COOKIE_SAMESITE='Lax',
+        SESSION_COOKIE_SECURE=False
+    )
+else:
+    app.config.update(
+        SESSION_COOKIE_SAMESITE='None',
+        SESSION_COOKIE_SECURE=True
+    )
 
 CORS(app, supports_credentials=True, origins=[
     'http://localhost:3000',
@@ -125,5 +130,5 @@ CORS(app, supports_credentials=True, origins=[
 #     print("Database seeded successfully.")
 
 # # Entry point
-# if __name__ == "__main__":
-#     app.run(port=5555, debug=True)
+if __name__ == "__main__":
+    app.run(port=5555, debug=True)

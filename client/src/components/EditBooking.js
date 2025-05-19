@@ -18,6 +18,7 @@ const EditBooking = ({ booking, handleUpdate }) => {
       // console.log("Booking before fetch:", values);
       fetch(`${process.env.REACT_APP_API_BASE_URL}/bookings/${booking.id}`, {
         method: "PATCH",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },

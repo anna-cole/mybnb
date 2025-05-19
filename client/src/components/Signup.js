@@ -5,13 +5,13 @@ import * as yup from 'yup';
 import { UserContext } from '../context/UserContext';
 
 const Signup = () => {
-  const { login, error, setError } = useContext(UserContext);
+  const { login, setError } = useContext(UserContext);
 
   useEffect(() => {
     return () => {
       setError(null);
     }
-  }, [])
+  }, [setError])
 
   const navigate = useNavigate();
 

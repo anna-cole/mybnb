@@ -11,7 +11,8 @@ const Navbar = () => {
   const handleLogout = e => {
     e.preventDefault();
     fetch(`${process.env.REACT_APP_API_BASE_URL}/logout`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      credentials: 'include' // Support session cookies
     })
     logout();
     navigate("/");
