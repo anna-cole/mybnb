@@ -10,7 +10,7 @@ const BookingsProvider = ({ children }) => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await fetch(`https://mybnb-backend.onrender.com/properties`, {
+        const response = await fetch(`https://mybnb-backend.onrender.com/bookings`, {
           credentials: 'include', // Support session cookies
         });
 
@@ -19,6 +19,7 @@ const BookingsProvider = ({ children }) => {
         }
 
         const data = await response.json();
+        console.log("Fetched bookings data:", data);
         setBookings(data);
       } catch (err) {
         console.error(err);
