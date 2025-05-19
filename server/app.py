@@ -29,12 +29,16 @@ class Signup(Resource):
 
 class CheckSession(Resource):
     def get(self):
-        guest_id = session['guest_id']
-        if guest_id:
-            guest = Guest.query.filter(Guest.id == guest_id).first()
-            return guest.to_dict(), 200
-        return {'error': '401 Unauthorized'}, 401 
-    
+        guest_id = session.get('guest_id')
+        if not guest_id:
+            return {'error': 'Unauthorized'}, 401
+
+        guest = Guest.query.filter_by(id=guest_id).first()
+        if not guest:
+            return {'error': 'Guest not found'}, 404
+
+        return guest.to_dict(), 200
+ 
 class Login(Resource):
     def post(self):
         email = request.get_json()['email']
