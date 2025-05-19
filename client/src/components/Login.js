@@ -63,7 +63,7 @@ const Login = () => {
               name="email"
               onChange={formik.handleChange}
               value={formik.values.email}
-              autocomplete="off"
+              autocomplete="email"
             />
             <p style={{ color: "red" }}> {formik.errors.email}</p>
             <label htmlFor="password">Password</label>
@@ -74,7 +74,7 @@ const Login = () => {
               name="password"
               onChange={formik.handleChange}
               value={formik.values.password}
-              autocomplete="off"
+              autocomplete="current-password"
             />
             <p style={{ color: "red" }}> {formik.errors.password}</p>
             <button type="submit" className="submit-button">Log in</button>
