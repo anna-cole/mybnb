@@ -4,34 +4,54 @@ const BookingsContext = createContext();
 
 const BookingsProvider = ({ children }) => {
   const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/bookings`)
-      .then(resp => resp.json())
-      .then(bookings => setBookings(bookings))
-  }, [])
+    const fetchBookings = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/bookings`, {
+          credentials: 'include', // Support session cookies
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch bookings: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setBookings(data);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBookings();
+  }, []);
 
   const addBooking = (newBooking) => {
-    setBookings([...bookings, newBooking])
-  }
+    setBookings(prev => [...prev, newBooking]);
+  };
 
-  const deleteBooking = id => {
-    const updatedBookings = bookings.filter(booking => booking.id !== id)
-    setBookings(updatedBookings)
-  }
+  const deleteBooking = (id) => {
+    setBookings(prev => prev.filter(booking => booking.id !== id));
+  };
 
-  const updateBooking = updatedBookingObj => {
-    const updatedBookings = bookings.map(booking => {
-      if (booking.id === updatedBookingObj.id) {
-        return updatedBookingObj
-      } else {
-        return booking
-      }
-    })
-    setBookings(updatedBookings)
-  }
+  const updateBooking = (updatedBooking) => {
+    setBookings(prev =>
+      prev.map(booking =>
+        booking.id === updatedBooking.id ? updatedBooking : booking
+      )
+    );
+  };
 
-  return <BookingsContext.Provider value={{bookings, addBooking, deleteBooking, updateBooking}}>{ children }</BookingsContext.Provider>;
-}
+  return (
+    <BookingsContext.Provider value={{ bookings, addBooking, deleteBooking, updateBooking, loading, error }}>
+      {children}
+    </BookingsContext.Provider>
+  );
+};
 
 export { BookingsContext, BookingsProvider };
